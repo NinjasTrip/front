@@ -12,20 +12,38 @@ import downArrow from "@/assets/img/down-arrow.svg";
 import DownArrWhite from "@/assets/img/down-arrow-white.svg";
 import bootstrapMin from "bootstrap/dist/js/bootstrap.min";
 
+const isAuthenticated = ref(false);
+
+// page moving
+const moveLogin = () => {
+    router.push({ name: "login" });
+    console.log("Success Move Login");
+};
+
+// about Feature
+
+const logout = () => {
+    // 로그아웃 처리 로직 (API 호출 등)
+    console.log("Logged out successfully");
+    isAuthenticated.value = false; // 상태 업데이트
+    router.push({ name: "presentation" }); // 홈 페이지로 리다이렉트
+};
+
 const props = defineProps({
     action: {
         type: Object,
-        route: String,
+        route: Boolean,
         color: String,
         label: String,
         default: () => ({
+            // route: isAuthenticated.value ? logout : moveLogin,
+            // label: "LOGIN",
             color: "btn-white",
-            label: "LOGIN",
         }),
     },
     transparent: {
         type: Boolean,
-        default: false,
+        default: true,
     },
     light: {
         type: Boolean,
@@ -92,23 +110,6 @@ watch(
     }
 );
 
-// page moving
-const moveLogin = () => {
-    router.push({ name: "login" });
-    console.log("Success Move Login");
-};
-
-// about Feature
-
-const isAuthenticated = ref(false);
-
-const logout = () => {
-    // 로그아웃 처리 로직 (API 호출 등)
-    console.log("Logged out successfully");
-    isAuthenticated.value = false; // 상태 업데이트
-    router.push({ name: "home" }); // 홈 페이지로 리다이렉트
-};
-
 // Dynamic actions
 const buttonAction = computed(() => {
     return isAuthenticated.value ? { label: "LOGOUT", action: logout } : { label: "LOGIN", action: moveLogin };
@@ -123,11 +124,9 @@ const buttonAction = computed(() => {
         ' navbar-dark bg-gradient-dark z-index-3 py-3': props.dark,
     }">
         <div :class="props.transparent || props.light || props.dark ? 'container' : 'container-fluid px-0'">
-            <RouterLink class="navbar-brand d-none d-md-block" :class="[
-                (props.transparent && textDark.value) || !props.transparent
-                    ? 'text-dark font-weight-bolder ms-sm-3'
-                    : 'text-white font-weight-bolder ms-sm-3',
-            ]" :to="{ name: 'presentation' }" rel="tooltip" title="Designed and Coded by Creative Tim"
+            <RouterLink class="navbar-brand d-none d-md-block"
+                :class="[(props.transparent && textDark.value) || !props.transparent ? 'text-dark font-weight-bolder ms-sm-3' : 'text-white font-weight-bolder ms-sm-3']"
+                :to="{ name: 'presentation' }" rel="tooltip" title="Designed and Coded by Creative Tim"
                 data-placement="bottom">
                 Ninja Trip
             </RouterLink>
@@ -136,7 +135,8 @@ const buttonAction = computed(() => {
                 rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom">
                 Ninja Trip
             </RouterLink>
-            <button class="btn btn-sm btn-white mb-0 ms-auto d-lg-none d-block" @click="moveLogin">Login</button>
+            <button class="btn btn-sm" :class="props.action.color + ' mb-0 ms-auto d-lg-none d-block'"
+                @click="buttonAction.action">{{ buttonAction.label }}</button>
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -163,12 +163,14 @@ const buttonAction = computed(() => {
                                 <div class="col-12 px-4 py-2">
                                     <div class="row">
                                         <div class="position-relative">
+
                                             <div
                                                 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
                                                 Make Your Trip
                                             </div>
                                             <RouterLink :to="{ name: 'contactus' }"
                                                 class="dropdown-item border-radius-md">
+
                                                 <span>Contact Us</span>
                                             </RouterLink>
                                             <RouterLink :to="{ name: 'presentation' }"
@@ -177,8 +179,7 @@ const buttonAction = computed(() => {
                                             </RouterLink>
                                             <div
                                                 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0 mt-3">
-                                                Account
-                                            </div>
+                                                Account</div>
                                             <RouterLink :to="{ name: 'presentation' }"
                                                 class="dropdown-item border-radius-md">
                                                 <span>Sign In</span>
@@ -210,6 +211,7 @@ const buttonAction = computed(() => {
                         </div>
                     </li>
                     <li class="nav-item dropdown dropdown-hover mx-2">
+
                         <a role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center"
                             :class="getTextColor()" id="dropdownMenuBlocks" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -230,8 +232,7 @@ const buttonAction = computed(() => {
                                                     <div>
                                                         <h6
                                                             class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                            Page Sections
-                                                        </h6>
+                                                            Page Sections</h6>
                                                         <span class="text-sm">See all sections</span>
                                                     </div>
                                                     <img :src="downArrow" alt="down-arrow" class="arrow" />
@@ -240,13 +241,9 @@ const buttonAction = computed(() => {
                                         </a>
                                         <div class="dropdown-menu mt-0 py-3 px-2 mt-3">
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Page Headers
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Page Headers </RouterLink>
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Features
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Features </RouterLink>
                                         </div>
                                     </li>
                                     <li
@@ -257,8 +254,7 @@ const buttonAction = computed(() => {
                                                     <div>
                                                         <h6
                                                             class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                            Navigation
-                                                        </h6>
+                                                            Navigation</h6>
                                                         <span class="text-sm">See all navigations</span>
                                                     </div>
                                                     <img :src="downArrow" alt="down-arrow" class="arrow" />
@@ -267,17 +263,11 @@ const buttonAction = computed(() => {
                                         </a>
                                         <div class="dropdown-menu mt-0 py-3 px-2 mt-3">
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Navbars
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Navbars </RouterLink>
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Nav Tabs
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Nav Tabs </RouterLink>
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Pagination
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Pagination </RouterLink>
                                         </div>
                                     </li>
                                     <li
@@ -288,8 +278,7 @@ const buttonAction = computed(() => {
                                                     <div>
                                                         <h6
                                                             class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                            Input Areas
-                                                        </h6>
+                                                            Input Areas</h6>
                                                         <span class="text-sm">See all input areas</span>
                                                     </div>
                                                     <img :src="downArrow" alt="down-arrow" class="arrow" />
@@ -298,13 +287,9 @@ const buttonAction = computed(() => {
                                         </a>
                                         <div class="dropdown-menu mt-0 py-3 px-2 mt-3">
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Inputs
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Inputs </RouterLink>
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Forms
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Forms </RouterLink>
                                         </div>
                                     </li>
                                     <li
@@ -315,8 +300,7 @@ const buttonAction = computed(() => {
                                                     <div>
                                                         <h6
                                                             class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                            Attention Catchers
-                                                        </h6>
+                                                            Attention Catchers</h6>
                                                         <span class="text-sm">See all examples</span>
                                                     </div>
                                                     <img :src="downArrow" alt="down-arrow" class="arrow" />
@@ -325,17 +309,11 @@ const buttonAction = computed(() => {
                                         </a>
                                         <div class="dropdown-menu mt-0 py-3 px-2 mt-3">
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Alerts
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Alerts </RouterLink>
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Modals
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Modals </RouterLink>
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Tooltips & Popovers
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Tooltips & Popovers </RouterLink>
                                         </div>
                                     </li>
                                     <li
@@ -346,8 +324,7 @@ const buttonAction = computed(() => {
                                                     <div>
                                                         <h6
                                                             class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                            Elements
-                                                        </h6>
+                                                            Elements</h6>
                                                         <span class="text-sm">See all elements</span>
                                                     </div>
                                                     <img :src="downArrow" alt="down-arrow" class="arrow" />
@@ -356,41 +333,23 @@ const buttonAction = computed(() => {
                                         </a>
                                         <div class="dropdown-menu mt-0 py-3 px-2 mt-3">
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Avatars
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Avatars </RouterLink>
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Badges
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Badges </RouterLink>
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Breadcrumbs
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Breadcrumbs </RouterLink>
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Buttons
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Buttons </RouterLink>
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Button Groups
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Button Groups </RouterLink>
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Dropdowns
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Dropdowns </RouterLink>
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Progress Bars
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Progress Bars </RouterLink>
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Toggles
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Toggles </RouterLink>
                                             <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }">
-                                                Typography
-                                            </RouterLink>
+                                                :to="{ name: 'presentation' }"> Typography </RouterLink>
                                         </div>
                                     </li>
                                 </ul>
@@ -402,46 +361,35 @@ const buttonAction = computed(() => {
                                             <div>
                                                 <h6
                                                     class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                    Page Sections
-                                                </h6>
+                                                    Page Sections</h6>
                                             </div>
                                         </div>
                                     </div>
                                     <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                        :to="{ name: 'presentation' }">
-                                        Page Headers
-                                    </RouterLink>
+                                        :to="{ name: 'presentation' }"> Page Headers </RouterLink>
                                     <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                        :to="{ name: 'presentation' }">
-                                        Features
-                                    </RouterLink>
+                                        :to="{ name: 'presentation' }"> Features </RouterLink>
                                     <div class="d-flex mb-2 mt-3">
                                         <div class="w-100 d-flex align-items-center justify-content-between">
                                             <div>
                                                 <h6
                                                     class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                    Navigation
-                                                </h6>
+                                                    Navigation</h6>
                                             </div>
                                         </div>
                                     </div>
                                     <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
                                         :to="{ name: 'presentation' }"> Navbars </RouterLink>
                                     <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                        :to="{ name: 'presentation' }">
-                                        Nav Tabs
-                                    </RouterLink>
+                                        :to="{ name: 'presentation' }"> Nav Tabs </RouterLink>
                                     <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                        :to="{ name: 'presentation' }">
-                                        Pagination
-                                    </RouterLink>
+                                        :to="{ name: 'presentation' }"> Pagination </RouterLink>
                                     <div class="d-flex mb-2 mt-3">
                                         <div class="w-100 d-flex align-items-center justify-content-between">
                                             <div>
                                                 <h6
                                                     class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                    Input Areas
-                                                </h6>
+                                                    Input Areas</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -454,8 +402,7 @@ const buttonAction = computed(() => {
                                             <div>
                                                 <h6
                                                     class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                    Attention Catchers
-                                                </h6>
+                                                    Attention Catchers</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -464,16 +411,13 @@ const buttonAction = computed(() => {
                                     <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
                                         :to="{ name: 'presentation' }"> Modals </RouterLink>
                                     <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                        :to="{ name: 'presentation' }">
-                                        Tooltips & Popovers
-                                    </RouterLink>
+                                        :to="{ name: 'presentation' }"> Tooltips & Popovers </RouterLink>
                                     <div class="d-flex mb-2 mt-3">
                                         <div class="w-100 d-flex align-items-center justify-content-between">
                                             <div>
                                                 <h6
                                                     class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                    Elements
-                                                </h6>
+                                                    Elements</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -482,29 +426,19 @@ const buttonAction = computed(() => {
                                     <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
                                         :to="{ name: 'presentation' }"> Badges </RouterLink>
                                     <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                        :to="{ name: 'presentation' }">
-                                        Breadcrumbs
-                                    </RouterLink>
+                                        :to="{ name: 'presentation' }"> Breadcrumbs </RouterLink>
                                     <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
                                         :to="{ name: 'presentation' }"> Buttons </RouterLink>
                                     <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                        :to="{ name: 'presentation' }">
-                                        Button Groups
-                                    </RouterLink>
+                                        :to="{ name: 'presentation' }"> Button Groups </RouterLink>
                                     <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                        :to="{ name: 'presentation' }">
-                                        Dropdowns
-                                    </RouterLink>
+                                        :to="{ name: 'presentation' }"> Dropdowns </RouterLink>
                                     <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                        :to="{ name: 'presentation' }">
-                                        Progress Bars
-                                    </RouterLink>
+                                        :to="{ name: 'presentation' }"> Progress Bars </RouterLink>
                                     <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
                                         :to="{ name: 'presentation' }"> Toggles </RouterLink>
                                     <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                        :to="{ name: 'presentation' }">
-                                        Typography
-                                    </RouterLink>
+                                        :to="{ name: 'presentation' }"> Typography </RouterLink>
                                 </div>
                             </div>
                         </div>
@@ -513,6 +447,7 @@ const buttonAction = computed(() => {
                         <a role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center"
                             :class="getTextColor()" id="dropdownMenuDocs" data-bs-toggle="dropdown"
                             aria-expanded="false">
+
                             <i class="material-icons opacity-6 me-2 text-md" :class="getTextColor()">article</i>
                             Docs
                             <img :src="getArrowColor()" alt="down-arrow" class="arrow ms-2 d-lg-block d-none" />
@@ -527,8 +462,7 @@ const buttonAction = computed(() => {
                                             href=" https://www.creative-tim.com/learning-lab/vue/overview/material-kit/">
                                             <h6
                                                 class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                Getting Started
-                                            </h6>
+                                                Getting Started</h6>
                                             <span class="text-sm">All about overview, quick start, license and
                                                 contents</span>
                                         </a>
@@ -538,8 +472,7 @@ const buttonAction = computed(() => {
                                             href=" https://www.creative-tim.com/learning-lab/vue/colors/material-kit/">
                                             <h6
                                                 class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                Foundation
-                                            </h6>
+                                                Foundation</h6>
                                             <span class="text-sm">See our colors, icons and typography</span>
                                         </a>
                                     </li>
@@ -548,8 +481,7 @@ const buttonAction = computed(() => {
                                             href=" https://www.creative-tim.com/learning-lab/vue/alerts/material-kit/">
                                             <h6
                                                 class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                Components
-                                            </h6>
+                                                Components</h6>
                                             <span class="text-sm">Explore our collection of fully designed
                                                 components</span>
                                         </a>
@@ -561,37 +493,32 @@ const buttonAction = computed(() => {
                                     <a class="dropdown-item py-2 ps-3 border-radius-md" href="./pages/about-us.html">
                                         <h6
                                             class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                            Getting Started
-                                        </h6>
+                                            Getting Started</h6>
                                         <span class="text-sm">All about overview, quick start, license and
                                             contents</span>
                                     </a>
                                     <a class="dropdown-item py-2 ps-3 border-radius-md" href="./pages/about-us.html">
                                         <h6
                                             class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                            Foundation
-                                        </h6>
+                                            Foundation</h6>
                                         <span class="text-sm">See our colors, icons and typography</span>
                                     </a>
                                     <a class="dropdown-item py-2 ps-3 border-radius-md" href="./pages/about-us.html">
                                         <h6
                                             class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                            Components
-                                        </h6>
+                                            Components</h6>
                                         <span class="text-sm">Explore our collection of fully designed components</span>
                                     </a>
                                     <a class="dropdown-item py-2 ps-3 border-radius-md" href="./pages/about-us.html">
                                         <h6
                                             class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                            Plugins
-                                        </h6>
+                                            Plugins</h6>
                                         <span class="text-sm">Check how you can integrate our plugins</span>
                                     </a>
                                     <a class="dropdown-item py-2 ps-3 border-radius-md" href="./pages/about-us.html">
                                         <h6
                                             class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                            Utility Classes
-                                        </h6>
+                                            Utility Classes</h6>
                                         <span class="text-sm">For those who want flexibility, use our utility
                                             classes</span>
                                     </a>
@@ -599,25 +526,11 @@ const buttonAction = computed(() => {
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item dropdown dropdown-hover mx-2">
-                        <a href="https://github.com/NinjasTrip"
-                            class="nav-link d-flex cursor-pointer align-items-center">
-                            <svg width="20px" height="20px" class="material-icons me-2 opacity-6" viewBox="0 0 24 24"
-                                aria-hidden="true" data-testid="GitHubIcon" :fill="props.transparent && '#fff'">
-                                <path
-                                    d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27">
-                                </path>
-                            </svg>
-                            Github
-                        </a>
-                    </li>
                 </ul>
                 <ul class="navbar-nav d-lg-block d-none">
                     <li class="nav-item">
-                        <a :href="action.route" class="btn btn-sm mb-0" :class="action.color"
-                            onclick="smoothToPricing('pricing-soft-ui')">{{
-                                action.label
-                            }}</a>
+                        <a class="btn btn-sm mb-0" :class="action.color" @click="buttonAction.action">{{
+                            buttonAction.label }}</a>
                     </li>
                 </ul>
             </div>

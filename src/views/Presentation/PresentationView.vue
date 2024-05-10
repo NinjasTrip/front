@@ -38,7 +38,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <DefaultNavbar transparent />
+    <DefaultNavbar />
     <header class="bg-gradient-dark">
         <div class="page-header min-vh-75" :style="{ backgroundImage: `url(${bg0})` }">
             <span class="mask bg-gradient-dark opacity-6"></span>
@@ -52,8 +52,7 @@ onUnmounted(() => {
                             <h1>Happy</h1>
                         </div>
                         <p class="lead mb-4 text-white opacity-8">
-                            Make every trip unforgettable with Ninja Trip! Plan your destinations with ease, set detailed itineraries, and share your
-                            experiences by writing reviews after your travels.
+                            Make every trip unforgettable with Ninja Trip! Plan your destinations with ease, set detailed itineraries, and share your experiences by writing reviews after your travels.
                         </p>
                         <button type="submit" class="btn bg-white text-dark">Make your Trip</button>
                     </div>
