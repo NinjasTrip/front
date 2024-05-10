@@ -1,5 +1,14 @@
 <script setup>
-import { onMounted } from "vue";
+import { RouterLink } from "vue-router";
+import { onMounted, ref, watch, computed } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const moveSignUp = () => {
+    router.push({ name: "signup" });
+    console.log("Success Move sign-up");
+};
 
 // example components
 import DefaultNavbar from "@/examples/navbars/NavbarDefault.vue";
@@ -34,25 +43,6 @@ onMounted(() => {
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
                                     <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign in</h4>
-                                    <!--
-                  <div class="row mt-3">
-                    <div class="col-2 text-center ms-auto">
-                      <a class="btn btn-link px-3" href="javascript:;">
-                        <i class="fa fa-facebook text-white text-lg"></i>
-                      </a>
-                    </div>
-                    <div class="col-2 text-center px-1">
-                      <a class="btn btn-link px-3" href="javascript:;">
-                        <i class="fa fa-github text-white text-lg"></i>
-                      </a>
-                    </div>
-                    <div class="col-2 text-center me-auto">
-                      <a class="btn btn-link px-3" href="javascript:;">
-                        <i class="fa fa-google text-white text-lg"></i>
-                      </a>
-                    </div>
-                  </div>
-                  -->
                                 </div>
                             </div>
                             <div class="card-body">
@@ -82,7 +72,7 @@ onMounted(() => {
                                     </div>
                                     <p class="mt-4 text-sm text-center">
                                         Don't have an account?
-                                        <a href="#" class="text-success text-gradient font-weight-bold">Sign up</a>
+                                        <button class="text-success text-gradient font-weight-bold" @click="moveSignUp">Sign up</button>
                                     </p>
                                 </form>
                             </div>
