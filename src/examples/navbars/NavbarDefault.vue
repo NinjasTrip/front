@@ -43,7 +43,7 @@ const props = defineProps({
     },
     transparent: {
         type: Boolean,
-        default: true,
+        default: false,
     },
     light: {
         type: Boolean,
@@ -170,7 +170,6 @@ const buttonAction = computed(() => {
                                             </div>
                                             <RouterLink :to="{ name: 'contactus' }"
                                                 class="dropdown-item border-radius-md">
-
                                                 <span>Contact Us</span>
                                             </RouterLink>
                                             <RouterLink :to="{ name: 'presentation' }"

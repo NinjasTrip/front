@@ -23,11 +23,7 @@ import KakaoMap from "@/components/KakaoMap.vue";
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
       <div class="col-12">
-        <DefaultNavbar :sticky="true" :action="{
-          route: 'https://www.creative-tim.com/product/vue-material-kit-pro',
-          color: 'bg-gradient-success',
-          label: 'Login',
-        }" />
+        <DefaultNavbar />
       </div>
     </div>
   </div>
