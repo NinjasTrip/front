@@ -31,9 +31,7 @@ import KakaoMap from "@/components/KakaoMap.vue";
     <div class="page-header min-vh-100">
       <div class="container">
         <div class="row">
-
-          <KakaoMap
-            class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column" />
+          <KakaoMap />
 
 
           <div class="card d-flex blur justify-content-center shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
