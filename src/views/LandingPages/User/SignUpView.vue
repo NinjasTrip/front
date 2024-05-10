@@ -14,6 +14,12 @@ import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialSwitch from "@/components/MaterialSwitch.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 
+import bgImage from "@/assets/img/bgg6.jpg";
+
+const backgroundStyle = {
+    backgroundImage: `url(${bgImage})`,
+};
+
 // material-input
 import setMaterialInput from "@/assets/js/material-input";
 onMounted(() => {
@@ -53,13 +59,7 @@ function validateLastNumber() {
 <template>
     <DefaultNavbar transparent />
     <Header>
-        <div
-            class="page-header align-items-start min-vh-100"
-            :style="{
-                backgroundImage: 'url(https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80)',
-            }"
-            loading="lazy"
-        >
+        <div class="page-header align-items-start min-vh-100" :style="backgroundStyle" loading="lazy">
             <span class="mask bg-gradient-dark opacity-6"></span>
             <div class="container my-auto">
                 <div class="row">
@@ -99,7 +99,6 @@ function validateLastNumber() {
                                         }"
                                         type="text"
                                         pattern="^[가-힣a-zA-Z0-9]+$"
-                                        v-model="nickname"
                                     />
                                     <MaterialInput
                                         id="age"
