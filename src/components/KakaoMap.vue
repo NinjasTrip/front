@@ -1,5 +1,14 @@
 <template>
-    <KakaoMap  ref="mapRef" :lat="37.566826" :lng="126.9786567" @onLoadKakaoMap="onLoadKakaoMap">
+  <KakaoMap
+    ref="mapRef"
+    :lat="37.566826"
+    :lng="126.9786567"
+    :level="5"
+    :draggable="true"
+    width="100vw"
+    height="100vh"
+    @onLoadKakaoMap="onLoadKakaoMap"
+  >
     <KakaoMapMarker
       v-for="(marker, index) in markerList"
       :key="marker.key === undefined ? index : marker.key"
@@ -13,26 +22,31 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, type KakaoMapMarkerListItem } from 'vue';
-import { KakaoMap, KakaoMapMarker } from 'vue3-kakao-maps';
-const mapRef = ref(null);
+import { onMounted, ref } from 'vue';
+import { KakaoMap, KakaoMapMarker, type KakaoMapMarkerListItem } from 'vue3-kakao-maps';
 
-onMounted(() => {
-    const mapElement = mapRef.value.$el;
-    mapElement.style.position = 'fixed';
-    mapElement.style.top = '0';
-    mapElement.style.left = '0';
-    mapElement.style.width = '100vw';
-    mapElement.style.height = '100vh';
-    mapElement.style.zIndex = '-1';
-    mapElement.style.filter = 'grayscale(40%) contrast(75%)';
-});
-//라이브러리 사용 방법을 반드시 참고하여 주시기 바랍니다.
+const coordinate = {
+  lat: 33.450701,
+  lng: 126.570667
+};
+
+const mapRef = ref(null);
 const map = ref<kakao.maps.Map>();
 const markerList = ref<KakaoMapMarkerListItem[]>([]);
 
-const onLoadKakaoMap = (mapRef: kakao.maps.Map) => {
-  map.value = mapRef;
+onMounted(() => {
+  const mapElement = mapRef.value.$el;
+  mapElement.style.position = 'fixed';
+  mapElement.style.top = '0';
+  mapElement.style.left = '0';
+  mapElement.style.width = '100vw';
+  mapElement.style.height = '100vh';
+  mapElement.style.zIndex = '-1';
+  mapElement.style.filter = 'grayscale(40%) contrast(75%)';
+});
+
+const onLoadKakaoMap = (mapInstance: kakao.maps.Map) => {
+  map.value = mapInstance;
 
   // 장소 검색 객체를 생성합니다
   const ps = new kakao.maps.services.Places();
@@ -40,17 +54,17 @@ const onLoadKakaoMap = (mapRef: kakao.maps.Map) => {
   ps.keywordSearch('역삼역 맛집', placesSearchCB);
 };
 
-// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+// 키워드 검색 완료 시 호출되는 콜백함수입니다
 const placesSearchCB = (data: kakao.maps.services.PlacesSearchResult, status: kakao.maps.services.Status): void => {
   if (status === kakao.maps.services.Status.OK) {
-    // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+    // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기 위해
     // LatLngBounds 객체에 좌표를 추가합니다
     const bounds = new kakao.maps.LatLngBounds();
 
     for (let marker of data) {
       const markerItem: KakaoMapMarkerListItem = {
-        lat: marker.y,
-        lng: marker.x,
+        lat: Number(marker.y),
+        lng: Number(marker.x),
         infoWindow: {
           content: marker.place_name,
           visible: false
@@ -61,11 +75,11 @@ const placesSearchCB = (data: kakao.maps.services.PlacesSearchResult, status: ka
     }
 
     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-    map.value?.setBounds(bounds);
+    map.value?.setBounds(bounds,0,100,0,0);
   }
 };
 
-//마커 클릭 시 인포윈도우의 visible 값을 반전시킵니다
+// 마커 클릭 시 인포윈도우의 visible 값을 반전시킵니다
 const onClickMapMarker = (markerItem: KakaoMapMarkerListItem): void => {
   if (markerItem.infoWindow?.visible !== null && markerItem.infoWindow?.visible !== undefined) {
     markerItem.infoWindow.visible = !markerItem.infoWindow.visible;
@@ -75,21 +89,14 @@ const onClickMapMarker = (markerItem: KakaoMapMarkerListItem): void => {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #map {
-    position: fixed;
-    /* 화면에 고정 */
-    top: 0;
-    /* 상단 정렬 */
-    left: 0;
-    /* 좌측 정렬 */
-    width: 100vw;
-    /* 뷰포트 너비에 맞춤 */
-    height: 100vh;
-    /* 뷰포트 높이에 맞춤 */
-    z-index: -1;
-    /* 다른 요소들 뒤에 위치하도록 설정 */
-    filter: grayscale(40%) contrast(75%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  filter: grayscale(40%) contrast(75%);
 }
 </style>
