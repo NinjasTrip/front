@@ -12,6 +12,7 @@
     "dependencies": {
         "axios": "^1.6.8",
         "bootstrap": "^5.3.3",
+        "kakao.maps.d.ts": "^0.1.39",
         "pinia": "2.0.14",
         "prismjs": "1.28.0",
         "typed.js": "^2.1.0",
@@ -19,7 +20,9 @@
         "vue-clipboard3": "2.0.0",
         "vue-count-to": "1.0.13",
         "vue-prism-editor": "2.0.0-alpha.2",
-        "vue-router": "^4.3.0"
+        "vue-router": "^4.3.0",
+        "vue3-kakao-maps": "^2.3.6",
+        "vue3-kakao-sdk": "^0.0.4"
     },
     "devDependencies": {
         "@rushstack/eslint-patch": "1.1.0",

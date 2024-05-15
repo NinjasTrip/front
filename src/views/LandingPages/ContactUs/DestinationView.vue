@@ -248,7 +248,7 @@ const onGunguChange = () => {
 <style scoped>
 .custom-search-box {
     position: absolute;
-    top: 40px;
+    top: 80px;
     left: 15px;
     width: 400px;
     height: 250px;
@@ -261,7 +261,7 @@ const onGunguChange = () => {
 #showList {
     position: absolute;
 
-    top: 40px;
+    top: 80px;
     bottom: 20px;
     right: 15px;
 
