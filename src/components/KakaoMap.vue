@@ -4,7 +4,7 @@
     <KakaoMapMarker v-for="(marker, index) in markerList" :key="marker.key === undefined ? index : marker.key"
       :lat="marker.lat" :lng="marker.lng" :infoWindow="marker.infoWindow" :clickable="true" title="상대경로로 이미지 가져오기"
       :image="{
-        imageSrc: '/public/favicon2.png', imageWidth: 50, imageHeight:
+        imageSrc: '/public/favicon.png', imageWidth: 50, imageHeight:
           50, imageOption: {}
       }" @onClickKakaoMapMarker="onClickMapMarker(marker)" />
   </KakaoMap>
@@ -13,6 +13,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue';
 import { KakaoMap, KakaoMapMarker, type KakaoMapMarkerListItem } from 'vue3-kakao-maps';
+import { useMarkerStore } from '@/stores/useMarkerStore';
 
 const props = defineProps({
   searchKeyword: String,
@@ -21,6 +22,7 @@ const props = defineProps({
 const mapRef = ref(null);
 const map = ref<kakao.maps.Map>();
 const markerList = ref<KakaoMapMarkerListItem[]>([]);
+const markerStore = useMarkerStore();
 
 onMounted(() => {
   const mapElement = mapRef.value.$el;
@@ -32,6 +34,7 @@ onMounted(() => {
   mapElement.style.zIndex = '-1';
   mapElement.style.filter = 'grayscale(10%) contrast(90%)';
 });
+
 
 const onLoadKakaoMap = (mapInstance: kakao.maps.Map) => {
   map.value = mapInstance;
@@ -57,12 +60,13 @@ const placesSearchCB = (data: kakao.maps.services.PlacesSearchResult, status: ka
     const bounds = new kakao.maps.LatLngBounds();
     markerList.value = [];
 
+
     for (let marker of data) {
       const markerItem: KakaoMapMarkerListItem = {
         lat: Number(marker.y),
         lng: Number(marker.x),
         infoWindow: {
-          content: marker.place_name,
+          content: marker.address_name + "\n" + marker.phone + "\n" + marker.category_group_name + "\n" + marker.place_name,
           visible: false,
         },
       };
@@ -75,7 +79,15 @@ const placesSearchCB = (data: kakao.maps.services.PlacesSearchResult, status: ka
 };
 
 const onClickMapMarker = (markerItem: KakaoMapMarkerListItem): void => {
-  markerItem.infoWindow.visible = !markerItem.infoWindow.visible;
+  const details = markerItem.infoWindow.content.split("\n");
+  if (details.length === 4) {
+    markerStore.updateMarkerInfo({
+      address: details[0],
+      phone: details[1],
+      category: details[2],
+      placeName: details[3]
+    });
+  }
 };
 </script>
 

@@ -56,18 +56,22 @@
         <!-- 관광지 정보 요약 -->
         <div class="bg-white mb-2">
             <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
-                <h4 class="m-0">Sunshine Apartments</h4>
+                <h4 class="m-0">{{ markerStore.placeName }}</h4>
                 <button class="px-1">❤️</button>
             </div>
             <!-- contents -->
             <div class="px-3">
-                <div class="border-bottom d-flex py-2">
-                    <div class="text-secondary w-25">주소</div>
-                    <div>Jongno-gu 123-45</div>
+                <div class=" d-flex py-2">
+                    <div class="text-secondary w-25">전화번호</div>
+                    <div>{{ markerStore.phone }}</div>
                 </div>
-                <div class="d-flex py-2">
-                    <div class="text-secondary w-25">건축년도</div>
-                    <div>2005</div>
+                <div class=" d-flex py-2">
+                    <div class="text-secondary w-25">카테고리</div>
+                    <div>{{ markerStore.category }}</div>
+                </div>
+                <div class=" d-flex py-2">
+                    <div class="text-secondary w-25">주소</div>
+                    <div>{{ markerStore.address }}</div>
                 </div>
             </div>
             <div class="d-flex py-2 justify-content-center">
@@ -152,6 +156,7 @@ import DefaultNavbar from "@/examples/navbars/NavbarDefault.vue";
 import KakaoMap from "@/components/KakaoMap.vue";
 import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
+import { useMarkerStore } from '@/stores/useMarkerStore';
 
 const searchKeyword = ref('');
 const customKeyword = ref('');
@@ -165,6 +170,7 @@ const sidoList = ref([
 ]);
 const gunguList = ref([]);
 const dongList = ref([]);
+const markerStore = useMarkerStore();
 
 const combinedKeyword = computed(() => {
     let keyword = '';
