@@ -48,8 +48,7 @@
                 placeholder="Search" />
             <div class="col-md-12">
                 <MaterialButton @click="onSearchClick" type="submit" variant="gradient" color="secondary" fullWidth>
-                    Search
-                </MaterialButton>
+                    Search</MaterialButton>
             </div>
         </div>
     </div>
@@ -176,12 +175,9 @@ const combinedKeyword = computed(() => {
     return keyword.trim();
 });
 
-watch(combinedKeyword, (newKeyword) => {
-    searchKeyword.value = newKeyword;
-});
-
 const onSearchClick = () => {
     searchKeyword.value = combinedKeyword.value;
+    console.log('Search Clicked - Search Keyword:', searchKeyword.value);
 };
 
 // 시도 선택에 따라 군구 데이터 업데이트
@@ -189,6 +185,7 @@ const onSidoChange = () => {
     selectGungu.value = '';
     selectDong.value = '';
     dongList.value = [];
+    console.log('Sido Changed:', selectSido.value);
 
     if (selectSido.value === '01') {
         gunguList.value = [
@@ -229,6 +226,7 @@ const onGunguChange = () => {
             { dongCode: '030102', dongName: '수성동' }
         ];
     }
+    console.log('Gungu Changed:', selectGungu.value);
 };
 </script>
 
@@ -241,7 +239,7 @@ const onGunguChange = () => {
     height: 250px;
     background-color: rgba(255, 255, 255);
     padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.1);
 }
 
 #showList {

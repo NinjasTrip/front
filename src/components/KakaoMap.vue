@@ -7,6 +7,13 @@
             :lng="marker.lng"
             :infoWindow="marker.infoWindow"
             :clickable="true"
+            title="상대경로로 이미지 가져오기"
+            :image="{
+                imageSrc: '/public/favicon2.png',
+                imageWidth: 50,
+                imageHeight: 50,
+                imageOption: {},
+            }"
             @onClickKakaoMapMarker="onClickMapMarker(marker)"
         />
     </KakaoMap>
@@ -32,7 +39,7 @@ onMounted(() => {
     mapElement.style.width = "100vw";
     mapElement.style.height = "100vh";
     mapElement.style.zIndex = "-1";
-    mapElement.style.filter = "grayscale(40%) contrast(75%)";
+    mapElement.style.filter = "grayscale(10%) contrast(90%)";
 });
 
 const onLoadKakaoMap = (mapInstance: kakao.maps.Map) => {
@@ -74,6 +81,7 @@ const placesSearchCB = (data: kakao.maps.services.PlacesSearchResult, status: ka
 
         map.value?.setBounds(bounds, 0, 100, 0, 0);
     }
+    map.value?.setBounds(bounds, 100, 100, 100, 100);
 };
 
 const onClickMapMarker = (markerItem: KakaoMapMarkerListItem): void => {
@@ -81,14 +89,4 @@ const onClickMapMarker = (markerItem: KakaoMapMarkerListItem): void => {
 };
 </script>
 
-<style scoped>
-#map {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    filter: grayscale(40%) contrast(75%);
-}
-</style>
+<style scoped></style>
