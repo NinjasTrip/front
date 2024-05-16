@@ -30,30 +30,6 @@ const movePresentation = () => {
     router.push({ name: "presentation" });
     console.log("Success Move Login");
 };
-
-const areaCode = ref("010");
-const middleNumber = ref("");
-const lastNumber = ref("");
-
-function validateMiddleNumber() {
-    // 입력된 값이 숫자이고 4자리인지 확인
-    if (/^\d{4}$/.test(middleNumber.value)) {
-        // 조건을 만족하는 경우 아무 작업도 수행하지 않음
-    } else {
-        // 4자리 이상인 경우 처음 4자리만 남기고 자름
-        middleNumber.value = middleNumber.value.slice(0, 4);
-    }
-}
-
-function validateLastNumber() {
-    // 입력된 값이 숫자이고 4자리인지 확인
-    if (/^\d{4}$/.test(lastNumber.value)) {
-        // 조건을 만족하는 경우 아무 작업도 수행하지 않음
-    } else {
-        // 4자리 이상인 경우 처음 4자리만 남기고 자름
-        lastNumber.value = lastNumber.value.slice(0, 4);
-    }
-}
 </script>
 
 <template>
@@ -100,49 +76,6 @@ function validateLastNumber() {
                                         type="text"
                                         pattern="^[가-힣a-zA-Z0-9]+$"
                                     />
-                                    <MaterialInput
-                                        id="age"
-                                        class="input-group-outline mb-3"
-                                        :label="{
-                                            text: 'Age',
-                                            class: 'form-label',
-                                        }"
-                                        type="number"
-                                        min="0"
-                                    />
-                                    <!-- <MaterialInput
-                                        id="phone-number"
-                                        class="input-group-outline mb-3"
-                                        :label="{
-                                            text: 'Phone Number',
-                                            class: 'form-label',
-                                        }"
-                                        type="tel"
-                                        pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-                                    /> -->
-                                    <div class="input-group-outline mb-3">
-                                        <label for="phone-number" class="form-label">Phone Number</label>
-                                        <div class="row g-2 align-items-center">
-                                            <div class="col-auto">
-                                                <select class="form-select" v-model="areaCode" id="area-code">
-                                                    <option value="010">010</option>
-                                                    <option value="011">011</option>
-                                                    <option value="016">016</option>
-                                                    <option value="017">017</option>
-                                                    <option value="018">018</option>
-                                                    <option value="019">019</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-auto">-</div>
-                                            <div class="col">
-                                                <input type="number" class="form-control" v-model.number="middleNumber" @input="validateMiddleNumber" maxlength="4" placeholder="0000" />
-                                            </div>
-                                            <div class="col-auto">-</div>
-                                            <div class="col">
-                                                <input type="number" class="form-control" v-model.number="lastNumber" @input="validateLastNumber" maxlength="4" placeholder="0000" />
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="text-center">
                                         <MaterialButton class="my-4 mb-2" variant="gradient" color="success" fullWidth @click="movePresentation">회원 가입</MaterialButton>
                                     </div>
