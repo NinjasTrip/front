@@ -2,8 +2,11 @@
   <KakaoMap ref="mapRef" :lat="37.566826" :lng="126.9786567" :level="5" :draggable="true" width="100vw" height="100vh"
     @onLoadKakaoMap="onLoadKakaoMap">
     <KakaoMapMarker v-for="(marker, index) in markerList" :key="marker.key === undefined ? index : marker.key"
-      :lat="marker.lat" :lng="marker.lng" :infoWindow="marker.infoWindow" :clickable="true"
-      @onClickKakaoMapMarker="onClickMapMarker(marker)" />
+      :lat="marker.lat" :lng="marker.lng" :infoWindow="marker.infoWindow" :clickable="true" title="상대경로로 이미지 가져오기"
+      :image="{
+        imageSrc: '/public/favicon2.png', imageWidth: 50, imageHeight:
+          50, imageOption: {}
+      }" @onClickKakaoMapMarker="onClickMapMarker(marker)" />
   </KakaoMap>
 </template>
 
@@ -27,7 +30,7 @@ onMounted(() => {
   mapElement.style.width = '100vw';
   mapElement.style.height = '100vh';
   mapElement.style.zIndex = '-1';
-  mapElement.style.filter = 'grayscale(40%) contrast(75%)';
+  mapElement.style.filter = 'grayscale(10%) contrast(90%)';
 });
 
 const onLoadKakaoMap = (mapInstance: kakao.maps.Map) => {
@@ -76,14 +79,4 @@ const onClickMapMarker = (markerItem: KakaoMapMarkerListItem): void => {
 };
 </script>
 
-<style scoped>
-#map {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  filter: grayscale(40%) contrast(75%);
-}
-</style>
+<style scoped></style>

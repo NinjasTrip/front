@@ -239,7 +239,7 @@ const onGunguChange = () => {
     height: 250px;
     background-color: rgba(255, 255, 255);
     padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.1);
 }
 
 #showList {
