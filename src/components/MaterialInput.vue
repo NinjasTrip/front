@@ -1,5 +1,7 @@
 <script setup>
-defineProps({
+import { defineEmits, defineProps } from 'vue';
+
+const props = defineProps({
   id: {
     type: String,
     default: "",
@@ -16,7 +18,7 @@ defineProps({
       class: "",
     }),
   },
-  value: {
+  modelValue: {
     type: String,
     default: "",
   },
@@ -53,6 +55,9 @@ defineProps({
     default: "",
   },
 });
+
+const emit = defineEmits(['update:modelValue']);
+
 function getClasses(size, success, error) {
   let sizeValue, isValidValue;
 
@@ -68,24 +73,20 @@ function getClasses(size, success, error) {
 
   return `${sizeValue} ${isValidValue}`;
 }
+
+const updateValue = (event) => {
+  emit('update:modelValue', event.target.value);
+};
 </script>
+
 <template>
   <div class="input-group">
     <label v-if="label" :class="label.class">{{
       typeof label == "string" ? label : label.text
     }}</label>
-    <span v-if="icon" class="input-group-text"
-      ><i class="fas" :class="`fa-${icon}`" aria-hidden="true"></i
-    ></span>
-    <input
-      :id="id"
-      :type="type"
-      class="form-control"
-      :class="[getClasses(size, success, error), inputClass]"
-      :value="value"
-      :placeholder="placeholder"
-      :isRequired="isRequired"
-      :disabled="isDisabled"
-    />
+    <span v-if="icon" class="input-group-text"><i class="fas" :class="`fa-${icon}`" aria-hidden="true"></i></span>
+    <input :id="id" :type="type" class="form-control" :class="[getClasses(size, success, error), inputClass]"
+      :value="modelValue" @input="updateValue" :placeholder="placeholder" :isRequired="isRequired"
+      :disabled="isDisabled" />
   </div>
 </template>
