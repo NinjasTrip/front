@@ -175,12 +175,6 @@ const combinedKeyword = computed(() => {
     return keyword.trim();
 });
 
-watch([combinedKeyword, customKeyword], (newValues) => {
-    console.log('combinedKeyword:', newValues[0]);
-    console.log('customKeyword:', newValues[1]);
-    searchKeyword.value = newValues[0];
-});
-
 const onSearchClick = () => {
     searchKeyword.value = combinedKeyword.value;
     console.log('Search Clicked - Search Keyword:', searchKeyword.value);
