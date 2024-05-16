@@ -26,13 +26,13 @@ const markerStore = useMarkerStore();
 
 onMounted(() => {
   const mapElement = mapRef.value.$el;
-  mapElement.style.position = 'fixed';
-  mapElement.style.top = '0';
-  mapElement.style.left = '0';
-  mapElement.style.width = '100vw';
-  mapElement.style.height = '100vh';
-  mapElement.style.zIndex = '-1';
-  mapElement.style.filter = 'grayscale(10%) contrast(90%)';
+  mapElement.style.position = "fixed";
+  mapElement.style.top = "0";
+  mapElement.style.left = "0";
+  mapElement.style.width = "100vw";
+  mapElement.style.height = "100vh";
+  mapElement.style.zIndex = "-1";
+  mapElement.style.filter = "grayscale(10%) contrast(90%)";
 });
 
 
@@ -73,22 +73,20 @@ const placesSearchCB = (data: kakao.maps.services.PlacesSearchResult, status: ka
       markerList.value.push(markerItem);
       bounds.extend(new kakao.maps.LatLng(Number(marker.y), Number(marker.x)));
     }
-
     map.value?.setBounds(bounds, 100, 100, 100, 100);
-  }
-};
+  };
 
-const onClickMapMarker = (markerItem: KakaoMapMarkerListItem): void => {
-  const details = markerItem.infoWindow.content.split("\n");
-  if (details.length === 4) {
-    markerStore.updateMarkerInfo({
-      address: details[0],
-      phone: details[1],
-      category: details[2],
-      placeName: details[3]
-    });
-  }
-};
+  const onClickMapMarker = (markerItem: KakaoMapMarkerListItem): void => {
+    const details = markerItem.infoWindow.content.split("\n");
+    if (details.length === 4) {
+      markerStore.updateMarkerInfo({
+        address: details[0],
+        phone: details[1],
+        category: details[2],
+        placeName: details[3]
+      });
+    }
+  };
 </script>
 
 <style scoped></style>

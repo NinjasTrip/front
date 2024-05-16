@@ -197,11 +197,8 @@ const buttonAction = computed(() => {
                                 </div>
                             </div>
                             <div class="d-lg-none">
-                                <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0">Landing Pages</div>
-                                <RouterLink :to="{ name: 'presentation' }" class="dropdown-item border-radius-md">
-                                    <span>About Us</span>
-                                </RouterLink>
-                                <RouterLink :to="{ name: 'presentation' }" class="dropdown-item border-radius-md">
+                                <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0">Make Your Trip</div>
+                                <RouterLink :to="{ name: 'contactus' }" class="dropdown-item border-radius-md">
                                     <span>Contact Us</span>
                                 </RouterLink>
                                 <RouterLink :to="{ name: 'presentation' }" class="dropdown-item border-radius-md">
