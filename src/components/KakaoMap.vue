@@ -75,18 +75,19 @@ const placesSearchCB = (data: kakao.maps.services.PlacesSearchResult, status: ka
     }
     map.value?.setBounds(bounds, 100, 100, 100, 100);
   };
+}
 
-  const onClickMapMarker = (markerItem: KakaoMapMarkerListItem): void => {
-    const details = markerItem.infoWindow.content.split("\n");
-    if (details.length === 4) {
-      markerStore.updateMarkerInfo({
-        address: details[0],
-        phone: details[1],
-        category: details[2],
-        placeName: details[3]
-      });
-    }
-  };
+const onClickMapMarker = (markerItem: KakaoMapMarkerListItem): void => {
+  const details = markerItem.infoWindow.content.split("\n");
+  if (details.length === 4) {
+    markerStore.updateMarkerInfo({
+      address: details[0],
+      phone: details[1],
+      category: details[2],
+      placeName: details[3]
+    });
+  }
+};
 </script>
 
 <style scoped></style>
