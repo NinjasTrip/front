@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+import axios from "axios";
 import App from "./App.vue";
 import router from "./router";
 import { useKakao } from "vue3-kakao-maps/@utils";
@@ -17,3 +18,5 @@ app.use(createPinia());
 app.use(router);
 app.use(materialKit);
 app.mount("#app");
+
+app.config.globalProperties.axios = axios;
