@@ -47,6 +47,8 @@
             </div>
         </div>
     </div>
+
+    <AddToPlan v-if="modalOpen" @close="closeModal"/>
     <div id="showList" class="card p-0">
         <!-- 관광지 정보 요약 -->
         <div class="bg-white mb-2">
@@ -70,7 +72,7 @@
                 </div>
             </div>
             <div class="d-flex py-2 justify-content-center">
-                <MaterialButton type="submit" variant="gradient" color="secondary">Add to My Plan</MaterialButton>
+                <MaterialButton @click="openModal" type="submit" variant="gradient" color="secondary">Add to My Plan</MaterialButton>
             </div>
         </div>
         <div class="py-1 bg-secondary"></div>
@@ -151,8 +153,11 @@ import DefaultNavbar from "@/examples/navbars/NavbarDefault.vue";
 import KakaoMap from "@/components/KakaoMap.vue";
 import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
+import AddToPlan from "@/components/AddToPlan.vue";
 import { useMarkerStore } from "@/stores/useMarkerStore";
 
+
+const modalOpen = ref(false);
 const searchKeyword = ref("");
 const customKeyword = ref("");
 const selectSido = ref("");
@@ -167,6 +172,12 @@ const gunguList = ref([]);
 const dongList = ref([]);
 const markerStore = useMarkerStore();
 
+const openModal = () => {
+    modalOpen.value = true;
+}
+const closeModal = () =>{
+    modalOpen.value = false;
+}
 const combinedKeyword = computed(() => {
     let keyword = "";
     if (selectSido.value) keyword += sidoList.value.find((sido) => sido.sidoCode === selectSido.value)?.sidoName || "";

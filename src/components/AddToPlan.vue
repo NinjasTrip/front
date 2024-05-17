@@ -1,10 +1,6 @@
 <script setup>
 import { onMounted } from "vue";
 
-//example components
-import DefaultNavbar from "@/examples/navbars/NavbarDefault.vue";
-import DefaultFooter from "@/examples/footers/FooterDefault.vue";
-
 //material components
 import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialTextArea from "@/components/MaterialTextArea.vue";
@@ -15,29 +11,16 @@ import setMaterialInput from "@/assets/js/material-input";
 onMounted(() => {
   setMaterialInput();
 });
-
-import KakaoMap from "@/components/KakaoMap.vue";
-
 </script>
+
 <template>
-  <div class="container position-sticky z-index-sticky top-0">
-    <div class="row">
-      <div class="col-12">
-        <DefaultNavbar class="background" style="height: 70px; background-color: white; border-radius: 10px;" />
-      </div>
-    </div>
-  </div>
   <section>
-    <div class="page-header min-vh-100">
       <div class="container">
         <div class="row">
-          <KakaoMap />
-
-
           <div class="card d-flex blur justify-content-center shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-              <div class="bg-gradient-success shadow-success border-radius-lg p-3">
-                <h3 class="text-white text-success mb-0">Choose a destination</h3>
+              <div class="bg-gradient-secondary shadow-secondary border-radius-lg p-3">
+                <h3 class="text-white text-success mb-0">Add to Plan</h3>
               </div>
             </div>
             <div class="card-body">
@@ -65,7 +48,7 @@ import KakaoMap from "@/components/KakaoMap.vue";
                   </div>
                   <div class="row">
                     <div class="col-md-12 text-center">
-                      <MaterialButton variant="gradient" color="success" class="mt-3 mb-0">Send Message
+                      <MaterialButton variant="gradient" color="secondary" class="mt-3 mb-0">Send Message
                       </MaterialButton>
                     </div>
                   </div>
@@ -75,7 +58,5 @@ import KakaoMap from "@/components/KakaoMap.vue";
           </div>
         </div>
       </div>
-    </div>
   </section>
-  <DefaultFooter />
 </template>
