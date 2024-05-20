@@ -22,7 +22,7 @@ const login = async () => {
     console.log("isLogin: " + isLogin.value);
     if (isLogin.value) {
         getUserInfo(token);
-        router.replace({ name: "presentation" });
+        // router.({ name: "presentation" });
     }
     console.log("sus");
 };
