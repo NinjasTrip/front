@@ -55,7 +55,9 @@ onUnmounted(() => {
                             Make every trip unforgettable with Ninja Trip! Plan your destinations with ease, set
                             detailed itineraries, and share your experiences by writing reviews after your travels.
                         </p>
-                        <button type="submit" class="btn bg-white text-dark">Make your Trip</button>
+                        <a href="/pages/landing-pages/contact-us" class="btn bg-white text-dark">
+                            Make your Trip
+                        </a>
                     </div>
                 </div>
             </div>
