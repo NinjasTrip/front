@@ -53,7 +53,8 @@
         </div>
     </div>
 
-    <AddToPlan v-if="modalOpen" @close="closeModal" />
+    <AddToPlan v-if="modalOpen1" @close="closeModal1" />
+    <AddReview v-if="modalOpen2" @close="closeModal2" />
     <div id="showList" class="card p-0">
         <!-- 관광지 정보 요약 -->
         <div class="bg-white mb-2">
@@ -76,10 +77,9 @@
                 </div>
             </div>
             <div class="d-flex py-2 justify-content-center">
-                <Transition name="fade">
-                    <MaterialButton @click="openModal" type="submit" variant="gradient" color="secondary">Add to My Plan
-                    </MaterialButton>
-                </Transition>
+                <MaterialButton @click="openModal1" type="submit" variant="gradient" color="secondary">Add to My Plan
+                </MaterialButton>
+
             </div>
         </div>
         <div class="py-1 bg-secondary"></div>
@@ -87,7 +87,7 @@
         <div class="bg-white mb-2">
             <div class="d-flex justify-content-between align-items-center">
                 <h5 class="p-3 m-0">관광객 리뷰</h5>
-                <i class="bi bi-plus-circle px-3 cursor-pointer">+</i>
+                <i class="bi bi-plus-circle px-3 cursor-pointer" @click="openModal2">+</i>
             </div>
             <div class="border-top border-bottom d-flex align-items-center p-2">
                 <div class="text-secondary ps-2 pe-3">
@@ -162,10 +162,12 @@ import KakaoMap from "@/components/KakaoMap.vue";
 import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 import AddToPlan from "@/components/AddToPlan.vue";
+import AddReview from "@/components/AddReview.vue";
 import { useMarkerStore } from "@/stores/useMarkerStore";
 
 
-const modalOpen = ref(false);
+const modalOpen1 = ref(false);
+const modalOpen2 = ref(false);
 const searchKeyword = ref("");
 const customKeyword = ref("");
 const selectSido = ref("");
@@ -180,11 +182,17 @@ const gunguList = ref([]);
 const dongList = ref([]);
 const markerStore = useMarkerStore();
 
-const openModal = () => {
-    modalOpen.value = true;
+const openModal1 = () => {
+    modalOpen1.value = true;
 }
-const closeModal = () => {
-    modalOpen.value = false;
+const closeModal1 = () => {
+    modalOpen1.value = false;
+}
+const openModal2 = () => {
+    modalOpen2.value = true;
+}
+const closeModal2 = () => {
+    modalOpen2.value = false;
 }
 const combinedKeyword = computed(() => {
     let keyword = "";
@@ -279,19 +287,5 @@ const onGunguChange = () => {
 
 .bi-plus-circle:hover {
     color: dodgerblue;
-}
-
-/* 페이드 인/아웃 효과 */
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to
-
-/* .fade-leave-active in <2.1.8 */
-    {
-    opacity: 0;
 }
 </style>

@@ -38,7 +38,7 @@ defineProps({
             <p class="mb-0">
                 {{ description }}
             </p>
-            <button type="button" class="btn btn-sm mb-0 mt-3" :class="action.color">
+            <button href="" type="button" class="btn btn-sm mb-0 mt-3" :class="action.color">
                 {{ action.label }}
             </button>
         </div>
