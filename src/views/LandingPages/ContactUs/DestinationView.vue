@@ -218,8 +218,31 @@ const onSidoChange = () => {
     if (selectSido.value === "01") {
         gunguList.value = [
             { gunguCode: "0101", gunguName: "강남구" },
-            { gunguCode: "0102", gunguName: "서초구" },
-            { gunguCode: "0103", gunguName: "종로구" },
+            { gunguCode: "0102", gunguName: "강동구" },
+            { gunguCode: "0103", gunguName: "강북구" },
+            { gunguCode: "0104", gunguName: "강서구" },
+            { gunguCode: "0105", gunguName: "관악구" },
+            { gunguCode: "0106", gunguName: "광진구" },
+            { gunguCode: "0107", gunguName: "구로구" },
+            { gunguCode: "0108", gunguName: "금천구" },
+            { gunguCode: "0109", gunguName: "노원구" },
+            { gunguCode: "0110", gunguName: "도봉구" },
+            { gunguCode: "0111", gunguName: "동대문구" },
+            { gunguCode: "0112", gunguName: "동작구" },
+            { gunguCode: "0113", gunguName: "마포구" },
+            { gunguCode: "0114", gunguName: "서대문구" },
+            { gunguCode: "0115", gunguName: "서초구" },
+            { gunguCode: "0116", gunguName: "성동구" },
+            { gunguCode: "0117", gunguName: "성북구" },
+            { gunguCode: "0118", gunguName: "송파구" },
+            { gunguCode: "0119", gunguName: "양천구" },
+            { gunguCode: "0120", gunguName: "영등포구" },
+            { gunguCode: "0121", gunguName: "용산구" },
+            { gunguCode: "0122", gunguName: "은평구" },
+            { gunguCode: "0123", gunguName: "종로구" },
+            { gunguCode: "0124", gunguName: "중구" },
+            { gunguCode: "0125", gunguName: "중랑구" }
+
         ];
     } else if (selectSido.value === "02") {
         gunguList.value = [
@@ -240,8 +263,18 @@ const onSidoChange = () => {
 const onGunguChange = () => {
     if (selectGungu.value === "0101") {
         dongList.value = [
-            { dongCode: "010101", dongName: "논현동" },
+            { dongCode: "010101", dongName: "신사동" },
+            { dongCode: "010102", dongName: "압구정동" },
+            { dongCode: "010102", dongName: "청담동" },
+            { dongCode: "010102", dongName: "논현동" },
+            { dongCode: "010102", dongName: "삼성동" },
             { dongCode: "010102", dongName: "역삼동" },
+            { dongCode: "010102", dongName: "대치동" },
+            { dongCode: "010102", dongName: "도곡동" },
+            { dongCode: "010102", dongName: "개포동" },
+            { dongCode: "010102", dongName: "일원동" },
+            { dongCode: "010102", dongName: "수서동" },
+            { dongCode: "010102", dongName: "세곡동" },
         ];
     } else if (selectGungu.value === "0201") {
         dongList.value = [
