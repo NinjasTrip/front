@@ -2,7 +2,7 @@
     <div class="container position-sticky z-index-sticky top-0">
         <div class="row">
             <div class="col-12">
-                <DefaultNavbar class="background" style="height: 70px; background-color: white; border-radius: 10px;" />
+                <DefaultNavbar class="background" style="height: 70px; background-color: white; border-radius: 10px" />
             </div>
         </div>
     </div>
@@ -13,7 +13,7 @@
         <div class="p-2">
             <div class="d-flex align-items-center">
                 <i class="fa fa-search"></i>
-                <span class="ps-2" style="font-size: 1rem;">주소 검색 및 키워드 검색</span>
+                <span class="ps-2" style="font-size: 1rem">주소 검색 및 키워드 검색</span>
             </div>
             <div class="p-3 pb-2 d-flex justify-content-evenly">
                 <div class="col-lg-4 col-md-6 col-sm-6">
@@ -52,6 +52,8 @@
             </div>
         </div>
     </div>
+
+    <AddToPlan v-if="modalOpen" @close="closeModal" />
     <div id="showList" class="card p-0">
         <!-- 관광지 정보 요약 -->
         <div class="bg-white mb-2">
@@ -74,7 +76,7 @@
                 </div>
             </div>
             <div class="d-flex py-2 justify-content-center">
-                <MaterialButton type="submit" variant="gradient" color="secondary">Add to My Plan
+                <MaterialButton @click="openModal" type="submit" variant="gradient" color="secondary">Add to My Plan
                 </MaterialButton>
             </div>
         </div>
@@ -87,11 +89,12 @@
             </div>
             <div class="border-top border-bottom d-flex align-items-center p-2">
                 <div class="text-secondary ps-2 pe-3">
-                    <img class="avatar rounded-circle" width="25px" src="">
+                    <img class="avatar rounded-circle" width="25px"
+                        src="https://github.com/UMCCMAP/server/assets/89764169/74577690-2d2d-4491-a3b8-319d8a947981" />
                 </div>
                 <div class="d-flex flex-column">
                     <h6 class="m-0">John Doe</h6>
-                    <div class="text-secondary" style="font-size: 0.9rem;">2023.4.10 가입</div>
+                    <div class="text-secondary" style="font-size: 0.9rem">2023.4.10 가입</div>
                 </div>
             </div>
             <div class="px-3">
@@ -151,88 +154,97 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch } from "vue";
 import DefaultNavbar from "@/examples/navbars/NavbarDefault.vue";
 import KakaoMap from "@/components/KakaoMap.vue";
 import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
-import { useMarkerStore } from '@/stores/useMarkerStore';
+import AddToPlan from "@/components/AddToPlan.vue";
+import { useMarkerStore } from "@/stores/useMarkerStore";
 
-const searchKeyword = ref('');
-const customKeyword = ref('');
-const selectSido = ref('');
-const selectGungu = ref('');
-const selectDong = ref('');
+
+const modalOpen = ref(false);
+const searchKeyword = ref("");
+const customKeyword = ref("");
+const selectSido = ref("");
+const selectGungu = ref("");
+const selectDong = ref("");
 const sidoList = ref([
-    { sidoCode: '01', sidoName: '서울' },
-    { sidoCode: '02', sidoName: '부산' },
-    { sidoCode: '03', sidoName: '대구' }
+    { sidoCode: "01", sidoName: "서울" },
+    { sidoCode: "02", sidoName: "부산" },
+    { sidoCode: "03", sidoName: "대구" },
 ]);
 const gunguList = ref([]);
 const dongList = ref([]);
 const markerStore = useMarkerStore();
 
+const openModal = () => {
+    modalOpen.value = true;
+}
+const closeModal = () => {
+    modalOpen.value = false;
+}
 const combinedKeyword = computed(() => {
-    let keyword = '';
-    if (selectSido.value) keyword += sidoList.value.find(sido => sido.sidoCode === selectSido.value)?.sidoName || '';
-    if (selectGungu.value) keyword += ' ' + gunguList.value.find(gungu => gungu.gunguCode === selectGungu.value)?.gunguName || '';
-    if (selectDong.value) keyword += ' ' + dongList.value.find(dong => dong.dongCode === selectDong.value)?.dongName || '';
-    if (customKeyword.value) keyword += ' ' + customKeyword.value;
+    let keyword = "";
+    if (selectSido.value) keyword += sidoList.value.find((sido) => sido.sidoCode === selectSido.value)?.sidoName || "";
+    if (selectGungu.value) keyword += " " + gunguList.value.find((gungu) => gungu.gunguCode === selectGungu.value)?.gunguName || "";
+    if (selectDong.value) keyword += " " + dongList.value.find((dong) => dong.dongCode === selectDong.value)?.dongName || "";
+    if (customKeyword.value) keyword += " " + customKeyword.value;
     return keyword.trim();
 });
 
 const onSearchClick = () => {
     searchKeyword.value = combinedKeyword.value;
-    console.log('Search Clicked - Search Keyword:', searchKeyword.value);
+    console.log("Search Clicked - Search Keyword:", searchKeyword.value);
 };
 
 // 시도 선택에 따라 군구 데이터 업데이트
 const onSidoChange = () => {
-    selectGungu.value = '';
-    selectDong.value = '';
+    selectGungu.value = "";
+    selectDong.value = "";
     dongList.value = [];
-    console.log('Sido Changed:', selectSido.value);
+    console.log("Sido Changed:", selectSido.value);
 
-    if (selectSido.value === '01') {
+    if (selectSido.value === "01") {
         gunguList.value = [
-            { gunguCode: '0101', gunguName: '강남구' },
-            { gunguCode: '0102', gunguName: '서초구' },
-            { gunguCode: '0103', gunguName: '종로구' }
+            { gunguCode: "0101", gunguName: "강남구" },
+            { gunguCode: "0102", gunguName: "서초구" },
+            { gunguCode: "0103", gunguName: "종로구" },
         ];
-    } else if (selectSido.value === '02') {
+    } else if (selectSido.value === "02") {
         gunguList.value = [
-            { gunguCode: '0201', gunguName: '해운대구' },
-            { gunguCode: '0202', gunguName: '부산진구' },
-            { gunguCode: '0203', gunguName: '동래구' }
+            { gunguCode: "0201", gunguName: "해운대구" },
+            { gunguCode: "0202", gunguName: "부산진구" },
+            { gunguCode: "0203", gunguName: "동래구" },
         ];
-    } else if (selectSido.value === '03') {
+    } else if (selectSido.value === "03") {
         gunguList.value = [
-            { gunguCode: '0301', gunguName: '수성구' },
-            { gunguCode: '0302', gunguName: '달서구' },
-            { gunguCode: '0303', gunguName: '중구' }
+            { gunguCode: "0301", gunguName: "수성구" },
+            { gunguCode: "0302", gunguName: "달서구" },
+            { gunguCode: "0303", gunguName: "중구" },
         ];
     }
 };
 
 // 군구 선택에 따라 동 데이터 업데이트
 const onGunguChange = () => {
-    if (selectGungu.value === '0101') {
+    if (selectGungu.value === "0101") {
         dongList.value = [
-            { dongCode: '010101', dongName: '논현동' },
-            { dongCode: '010102', dongName: '역삼동' }
+            { dongCode: "010101", dongName: "논현동" },
+            { dongCode: "010102", dongName: "역삼동" },
         ];
-    } else if (selectGungu.value === '0201') {
+    } else if (selectGungu.value === "0201") {
         dongList.value = [
-            { dongCode: '020101', dongName: '중동' },
-            { dongCode: '020102', dongName: '우동' }
+            { dongCode: "020101", dongName: "중동" },
+            { dongCode: "020102", dongName: "우동" },
         ];
-    } else if (selectGungu.value === '0301') {
+    } else if (selectGungu.value === "0301") {
         dongList.value = [
-            { dongCode: '030101', dongName: '범어동' },
-            { dongCode: '030102', dongName: '수성동' }
+            { dongCode: "030101", dongName: "범어동" },
+            { dongCode: "030102", dongName: "수성동" },
         ];
     }
-    console.log('Gungu Changed:', selectGungu.value);
+    console.log("Gungu Changed:", selectGungu.value);
 };
 </script>
 

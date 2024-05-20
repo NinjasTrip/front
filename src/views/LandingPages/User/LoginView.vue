@@ -3,7 +3,33 @@ import { RouterLink } from "vue-router";
 import { onMounted, ref, watch, computed } from "vue";
 import { useRouter } from "vue-router";
 
+const { VITE_ELECTRIC_CHARGING_STATION_URL } = import.meta.env;
+const { VITE_OPEN_API_SERVICE_KEY } = import.meta.env;
+
 const router = useRouter();
+
+const email = ref("");
+const password = ref("");
+
+onMounted(() => {
+    login();
+});
+
+const login = async () => {
+    try {
+        const response = await axios.post("/api/login", {
+            email: email.value,
+            password: password.value,
+        });
+
+        // 로그인 성공 시 액션
+        console.log("Login successful", response.data);
+        // 예를 들어, 홈 페이지로 리다이렉트
+        router.push({ name: "home" });
+    } catch (error) {
+        console.error("Login failed", error);
+    }
+};
 
 const moveSignUp = () => {
     router.push({ name: "signup" });
@@ -27,6 +53,7 @@ const backgroundStyle = {
 
 // material-input
 import setMaterialInput from "@/assets/js/material-input";
+import axios from "axios";
 onMounted(() => {
     setMaterialInput();
 });
