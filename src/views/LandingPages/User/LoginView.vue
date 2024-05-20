@@ -8,7 +8,8 @@ const router = useRouter();
 
 const userStore = useUserStore();
 
-const { isLogin } = storeToRefs(userStore);
+const { isLogin, isLoginError } = storeToRefs(userStore);
+const { userLogin, getUserInfo } = userStore;
 
 const loginUser = ref({
     email: "",
@@ -16,15 +17,17 @@ const loginUser = ref({
 });
 
 const login = async () => {
+    console.log(loginUser.email);
+    console.log(loginUser.password);
     await userLogin(loginUser.value);
     let token = sessionStorage.getItem("accessToken");
     console.log(token);
     console.log("isLogin: " + isLogin.value);
     if (isLogin.value) {
-        getUserInfo(token);
-        // router.({ name: "presentation" });
+        console.log("성공!!");
+        // getUserInfo(token);
+        router.replace({ name: "presentation" });
     }
-    console.log("sus");
 };
 
 const moveSignUp = () => {
@@ -54,6 +57,7 @@ onMounted(() => {
     setMaterialInput();
 });
 </script>
+
 <template>
     <DefaultNavbar transparent />
     <Header>
@@ -69,8 +73,9 @@ onMounted(() => {
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form role="form" class="text-start">
+                                <form role="form" class="text-start" @submit.prevent="login">
                                     <MaterialInput
+                                        v-model="loginUser.email"
                                         id="email"
                                         class="input-group-outline my-3"
                                         :label="{
@@ -80,6 +85,7 @@ onMounted(() => {
                                         type="email"
                                     />
                                     <MaterialInput
+                                        v-model="loginUser.password"
                                         id="password"
                                         class="input-group-outline mb-3"
                                         :label="{
@@ -91,7 +97,7 @@ onMounted(() => {
                                     <!-- <MaterialSwitch class="d-flex align-items-center mb-3" id="rememberMe" labelClass="mb-0 ms-3" checked>ID 정보 저장</MaterialSwitch> -->
 
                                     <div class="text-center">
-                                        <MaterialButton class="my-4 mb-2" variant="gradient" color="success" fullWidth @click="login">Sign in</MaterialButton>
+                                        <MaterialButton class="my-4 mb-2" variant="gradient" color="success" fullWidth>Sign in</MaterialButton>
                                     </div>
                                     <p class="mt-4 text-sm text-center">
                                         Don't have an account?
