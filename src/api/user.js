@@ -6,9 +6,9 @@ async function userConfirm(param, success, fail) {
     await local.post(`/user/login`, param).then(success).catch(fail);
 }
 
-async function findById(userid, success, fail) {
+async function findById(useridx, success, fail) {
     local.defaults.headers["Authorization"] = sessionStorage.getItem("accessToken");
-    await local.get(`/user/info/${userid}`).then(success).catch(fail);
+    await local.get(`/user/info/${useridx}`).then(success).catch(fail);
 }
 
 async function tokenRegeneration(user, success, fail) {
@@ -16,8 +16,8 @@ async function tokenRegeneration(user, success, fail) {
     await local.post(`/user/refresh`, user).then(success).catch(fail);
 }
 
-async function logout(userid, success, fail) {
-    await local.get(`/user/logout/${userid}`).then(success).catch(fail);
+async function logout(useridx, success, fail) {
+    await local.get(`/user/logout/${useridx}`).then(success).catch(fail);
 }
 
 export { userConfirm, findById, tokenRegeneration, logout };

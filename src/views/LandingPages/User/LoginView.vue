@@ -17,15 +17,13 @@ const loginUser = ref({
 });
 
 const login = async () => {
-    console.log(loginUser.email);
-    console.log(loginUser.password);
     await userLogin(loginUser.value);
     let token = sessionStorage.getItem("accessToken");
     console.log(token);
     console.log("isLogin: " + isLogin.value);
     if (isLogin.value) {
         console.log("성공!!");
-        // getUserInfo(token);
+        getUserInfo(token);
         router.replace({ name: "presentation" });
     }
 };
