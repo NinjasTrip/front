@@ -57,7 +57,6 @@
         <div class="bg-white mb-2">
             <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
                 <h4 class="m-0">{{ markerStore.placeName }}</h4>
-                <button class="px-1">❤️</button>
             </div>
             <!-- contents -->
             <div class="px-3">
@@ -75,7 +74,8 @@
                 </div>
             </div>
             <div class="d-flex py-2 justify-content-center">
-                <MaterialButton type="submit" variant="gradient" color="secondary">Add to My Plan</MaterialButton>
+                <MaterialButton type="submit" variant="gradient" color="secondary">Add to My Plan
+                </MaterialButton>
             </div>
         </div>
         <div class="py-1 bg-secondary"></div>
@@ -255,8 +255,8 @@ const onGunguChange = () => {
     right: 15px;
     width: 400px;
     padding: 10px;
-    z-index: 100;
     overflow-y: auto;
+    box-shadow: 0 16px 20px rgba(0, 0, 0, 0.1);
 }
 
 .bi-plus-circle {
