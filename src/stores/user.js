@@ -49,6 +49,7 @@ export const useUserStore = defineStore("userStore", () => {
             (response) => {
                 if (response.status === httpStatusCode.OK) {
                     userInfo.value = response.data.userInfo;
+                    console.log("유저인포 :: " + userInfo.value);
                 } else {
                     console.log("유저 정보 없음!!!!");
                 }
@@ -102,9 +103,9 @@ export const useUserStore = defineStore("userStore", () => {
     };
 
     const userLogout = async () => {
-        console.log("로그아웃 아이디 : " + userInfo.value.userId);
+        console.log("로그아웃 아이디 : " + userInfo.value.userIdx);
         await logout(
-            userInfo.value.userId,
+            userInfo.value.userIdx,
             (response) => {
                 if (response.status === httpStatusCode.OK) {
                     isLogin.value = false;
