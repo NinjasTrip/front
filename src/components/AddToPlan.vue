@@ -4,8 +4,13 @@ import { useMarkerStore } from "@/stores/useMarkerStore";
 import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 import setMaterialInput from "@/assets/js/material-input";
+import { useUserStore } from "@/stores/user";
+import { storeToRefs } from "pinia";
 
 const store = useMarkerStore();
+const userStore = useUserStore();
+const { userInfo } = storeToRefs(userStore);
+
 const form = ref({
     placeName: store.placeName,
     address: store.address,
