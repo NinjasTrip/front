@@ -8,7 +8,7 @@ const router = useRouter();
 
 const userStore = useUserStore();
 
-const { isLogin, isLoginError } = storeToRefs(userStore);
+const { isLogin } = storeToRefs(userStore);
 
 const loginUser = ref({
     email: "",
@@ -22,8 +22,9 @@ const login = async () => {
     console.log("isLogin: " + isLogin.value);
     if (isLogin.value) {
         getUserInfo(token);
-        router.replace("/");
+        // router.({ name: "presentation" });
     }
+    console.log("sus");
 };
 
 const moveSignUp = () => {
@@ -48,7 +49,7 @@ const backgroundStyle = {
 
 // material-input
 import setMaterialInput from "@/assets/js/material-input";
-import axios from "axios";
+
 onMounted(() => {
     setMaterialInput();
 });
@@ -87,10 +88,10 @@ onMounted(() => {
                                         }"
                                         type="password"
                                     />
-                                    <MaterialSwitch class="d-flex align-items-center mb-3" id="rememberMe" labelClass="mb-0 ms-3" checked>ID 정보 저장</MaterialSwitch>
+                                    <!-- <MaterialSwitch class="d-flex align-items-center mb-3" id="rememberMe" labelClass="mb-0 ms-3" checked>ID 정보 저장</MaterialSwitch> -->
 
                                     <div class="text-center">
-                                        <MaterialButton class="my-4 mb-2" variant="gradient" color="success" fullWidth>Sign in</MaterialButton>
+                                        <MaterialButton class="my-4 mb-2" variant="gradient" color="success" fullWidth @click="login">Sign in</MaterialButton>
                                     </div>
                                     <p class="mt-4 text-sm text-center">
                                         Don't have an account?

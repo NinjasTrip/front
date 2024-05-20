@@ -10,7 +10,7 @@ export const useUserStore = defineStore("userStore", () => {
     const router = useRouter();
 
     // 테스트를 위해 임시로 true를 발행
-    const isLogin = ref(true);
+    const isLogin = ref(false);
     const isLoginError = ref(false);
     const userInfo = ref(null);
     const isValidToken = ref(false);
