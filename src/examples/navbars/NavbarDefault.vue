@@ -153,7 +153,7 @@ const buttonAction = computed(() => {
                             :class="getTextColor()" id="dropdownMenuPages" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             <i class="material-icons opacity-6 me-2 text-md" :class="getTextColor()">dashboard</i>
-                            Pages
+                            Destinations
                             <img :src="getArrowColor()" alt="down-arrow" class="arrow ms-2 d-lg-block d-none" />
                             <img :src="getArrowColor()" alt="down-arrow" class="arrow ms-1 d-lg-none d-block ms-auto" />
                         </a>
@@ -168,18 +168,11 @@ const buttonAction = computed(() => {
                                                 Make Your Trip</div>
                                             <RouterLink :to="{ name: 'contactus' }"
                                                 class="dropdown-item border-radius-md">
-                                                <span>Contact Us</span>
+                                                <span>Search Destination</span>
                                             </RouterLink>
                                             <RouterLink :to="{ name: 'presentation' }"
                                                 class="dropdown-item border-radius-md">
                                                 <span>Author</span>
-                                            </RouterLink>
-                                            <div
-                                                class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0 mt-3">
-                                                Account</div>
-                                            <RouterLink :to="{ name: 'presentation' }"
-                                                class="dropdown-item border-radius-md">
-                                                <span>Sign In</span>
                                             </RouterLink>
                                         </div>
                                     </div>
@@ -195,12 +188,6 @@ const buttonAction = computed(() => {
                                 <RouterLink :to="{ name: 'presentation' }" class="dropdown-item border-radius-md">
                                     <span>Author</span>
                                 </RouterLink>
-                                <div
-                                    class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0 mt-3">
-                                    Account</div>
-                                <RouterLink :to="{ name: 'presentation' }" class="dropdown-item border-radius-md">
-                                    <span>Sign In</span>
-                                </RouterLink>
                             </div>
                         </div>
                     </li>
@@ -209,7 +196,7 @@ const buttonAction = computed(() => {
                             :class="getTextColor()" id="dropdownMenuBlocks" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             <i class="material-icons opacity-6 me-2 text-md" :class="getTextColor()">view_day</i>
-                            Sections
+                            Plans
                             <img :src="getArrowColor()" alt="down-arrow" class="arrow ms-2 d-lg-block d-none" />
                             <img :src="getArrowColor()" alt="down-arrow" class="arrow ms-1 d-lg-none d-block ms-auto" />
                         </a>
@@ -225,8 +212,8 @@ const buttonAction = computed(() => {
                                                     <div>
                                                         <h6
                                                             class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                            Page Sections</h6>
-                                                        <span class="text-sm">See all sections</span>
+                                                            Plan Sections</h6>
+                                                        <span class="text-sm">See all my Plans</span>
                                                     </div>
                                                     <img :src="downArrow" alt="down-arrow" class="arrow" />
                                                 </div>
@@ -247,54 +234,8 @@ const buttonAction = computed(() => {
                                                     <div>
                                                         <h6
                                                             class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                            Navigation</h6>
-                                                        <span class="text-sm">See all navigations</span>
-                                                    </div>
-                                                    <img :src="downArrow" alt="down-arrow" class="arrow" />
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-menu mt-0 py-3 px-2 mt-3">
-                                            <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }"> Navbars </RouterLink>
-                                            <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }"> Nav Tabs </RouterLink>
-                                            <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }"> Pagination </RouterLink>
-                                        </div>
-                                    </li>
-                                    <li
-                                        class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                                        <a class="dropdown-item py-2 ps-3 border-radius-md" href="javascript:;">
-                                            <div class="d-flex">
-                                                <div class="w-100 d-flex align-items-center justify-content-between">
-                                                    <div>
-                                                        <h6
-                                                            class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                            Input Areas</h6>
-                                                        <span class="text-sm">See all input areas</span>
-                                                    </div>
-                                                    <img :src="downArrow" alt="down-arrow" class="arrow" />
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-menu mt-0 py-3 px-2 mt-3">
-                                            <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }"> Inputs </RouterLink>
-                                            <RouterLink class="dropdown-item ps-3 border-radius-md mb-1"
-                                                :to="{ name: 'presentation' }"> Forms </RouterLink>
-                                        </div>
-                                    </li>
-                                    <li
-                                        class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                                        <a class="dropdown-item py-2 ps-3 border-radius-md" href="javascript:;">
-                                            <div class="d-flex">
-                                                <div class="w-100 d-flex align-items-center justify-content-between">
-                                                    <div>
-                                                        <h6
-                                                            class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                            Attention Catchers</h6>
-                                                        <span class="text-sm">See all examples</span>
+                                                            Share Diary</h6>
+                                                        <span class="text-sm">Upload diary to instagram</span>
                                                     </div>
                                                     <img :src="downArrow" alt="down-arrow" class="arrow" />
                                                 </div>
@@ -317,8 +258,8 @@ const buttonAction = computed(() => {
                                                     <div>
                                                         <h6
                                                             class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                            Elements</h6>
-                                                        <span class="text-sm">See all elements</span>
+                                                            Make Diary Image</h6>
+                                                        <span class="text-sm">Make image with DALLE</span>
                                                     </div>
                                                     <img :src="downArrow" alt="down-arrow" class="arrow" />
                                                 </div>
@@ -441,7 +382,7 @@ const buttonAction = computed(() => {
                             :class="getTextColor()" id="dropdownMenuDocs" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             <i class="material-icons opacity-6 me-2 text-md" :class="getTextColor()">article</i>
-                            Docs
+                            Accounts
                             <img :src="getArrowColor()" alt="down-arrow" class="arrow ms-2 d-lg-block d-none" />
                             <img :src="getArrowColor()" alt="down-arrow" class="arrow ms-1 d-lg-none d-block ms-auto" />
                         </a>
@@ -452,30 +393,12 @@ const buttonAction = computed(() => {
                                     <li class="nav-item list-group-item border-0 p-0">
                                         <a class="dropdown-item py-2 ps-3 border-radius-md"
                                             href=" https://www.creative-tim.com/learning-lab/vue/overview/material-kit/">
-                                            <h6
+                                            <RouterLink :to="{ name: 'presentation' }"
                                                 class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                Getting Started</h6>
+                                                <span>Sign In</span>
+                                            </RouterLink>
                                             <span class="text-sm">All about overview, quick start, license and
                                                 contents</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item list-group-item border-0 p-0">
-                                        <a class="dropdown-item py-2 ps-3 border-radius-md"
-                                            href=" https://www.creative-tim.com/learning-lab/vue/colors/material-kit/">
-                                            <h6
-                                                class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                Foundation</h6>
-                                            <span class="text-sm">See our colors, icons and typography</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item list-group-item border-0 p-0">
-                                        <a class="dropdown-item py-2 ps-3 border-radius-md"
-                                            href=" https://www.creative-tim.com/learning-lab/vue/alerts/material-kit/">
-                                            <h6
-                                                class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                Components</h6>
-                                            <span class="text-sm">Explore our collection of fully designed
-                                                components</span>
                                         </a>
                                     </li>
                                 </ul>
