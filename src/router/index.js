@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import PresentationView from "../views/Presentation/PresentationView.vue";
-import ContactView from "@/views/Presentation/LandingPages/ContactUs/ContactView.vue";
 import LoginView from "@/views/LandingPages/User/LoginView.vue";
 import SignUpView from "@/views/LandingPages/User/SignUpView.vue";
 import DestinationView from "@/views/LandingPages/ContactUs/DestinationView.vue";
@@ -30,7 +29,7 @@ const router = createRouter({
             component: DestinationView,
         },
         {
-            path: "/pages/plan/PlanView",
+            path: "/pages/Plan/PlanView",
             name: "plan",
             component: PlanView,
         },
