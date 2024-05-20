@@ -6,7 +6,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 // example components
-import DefaultNavbar from "@/examples/navbars/NavbarDefault.vue";
+import DefaultNavbar from "@/examples/navbars/NavbarBeforeLogin.vue";
 import Header from "@/examples/Header.vue";
 
 //Vue Material Kit 2 components

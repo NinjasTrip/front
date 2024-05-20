@@ -1,4 +1,3 @@
-// stores/useMarkerStore.ts
 import { defineStore } from "pinia";
 
 export const useMarkerStore = defineStore({

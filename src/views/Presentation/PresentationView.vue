@@ -1,8 +1,10 @@
 <script setup>
 import { onMounted, onUnmounted } from "vue";
+import { storeToRefs } from "pinia";
 
 //example components
 import DefaultNavbar from "@/examples/navbars/NavbarDefault.vue";
+import BeforeLoginNav from "@/examples/navbars/NavbarBeforeLogin.vue";
 import DefaultFooter from "@/examples/footers/FooterDefault.vue";
 
 //image
@@ -11,6 +13,11 @@ import bg0 from "@/assets/img/bg9.jpg";
 import Information from "./Sections/AboutInformation.vue";
 //dep
 import Typed from "typed.js";
+import { useUserStore } from "@/stores/user";
+
+const userStore = useUserStore();
+
+const { isLogin } = storeToRefs(userStore);
 
 const body = document.getElementsByTagName("body")[0];
 //hooks
@@ -38,7 +45,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <DefaultNavbar transparent />
+    <template v-if="isLogin">
+        <DefaultNavbar transparent />
+    </template>
+    <template v-else>
+        <BeforeLoginNav transparent />
+    </template>
     <header class="bg-gradient-dark">
         <div class="page-header min-vh-75" :style="{ backgroundImage: `url(${bg0})` }">
             <span class="mask bg-gradient-dark opacity-6"></span>
@@ -52,12 +64,9 @@ onUnmounted(() => {
                             <h1>Happy</h1>
                         </div>
                         <p class="lead mb-4 text-white opacity-8">
-                            Make every trip unforgettable with Ninja Trip! Plan your destinations with ease, set
-                            detailed itineraries, and share your experiences by writing reviews after your travels.
+                            Make every trip unforgettable with Ninja Trip! Plan your destinations with ease, set detailed itineraries, and share your experiences by writing reviews after your travels.
                         </p>
-                        <a href="/pages/landing-pages/contact-us" class="btn bg-white text-dark">
-                            Make your Trip
-                        </a>
+                        <a href="/pages/landing-pages/contact-us" class="btn bg-white text-dark"> Make your Trip </a>
                     </div>
                 </div>
             </div>
