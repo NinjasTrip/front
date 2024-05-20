@@ -76,8 +76,10 @@
                 </div>
             </div>
             <div class="d-flex py-2 justify-content-center">
-                <MaterialButton @click="openModal" type="submit" variant="gradient" color="secondary">Add to My Plan
-                </MaterialButton>
+                <Transition name="fade">
+                    <MaterialButton @click="openModal" type="submit" variant="gradient" color="secondary">Add to My Plan
+                    </MaterialButton>
+                </Transition>
             </div>
         </div>
         <div class="py-1 bg-secondary"></div>
@@ -277,5 +279,19 @@ const onGunguChange = () => {
 
 .bi-plus-circle:hover {
     color: dodgerblue;
+}
+
+/* 페이드 인/아웃 효과 */
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to
+
+/* .fade-leave-active in <2.1.8 */
+    {
+    opacity: 0;
 }
 </style>
