@@ -57,6 +57,7 @@ import MaterialButton from "@/components/MaterialButton.vue";
 import vue3starRatings from "vue3-star-ratings";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@/stores/user";
+import Swal from "sweetalert2";
 
 const userStore = useUserStore();
 const { userInfo } = storeToRefs(userStore);
@@ -76,6 +77,11 @@ const emit = defineEmits(['close']);
 
 function submitReview() {
     console.log('Review submitted:', review.value);
+    Swal.fire({
+        icon: "success",
+        title: `리뷰 추가 성공`,
+        text: `${userInfo.value.nickName}님 다른 사용자들을 위한 소중한 리뷰 감사합니다`,
+    });
     emit('close');
 }
 
