@@ -55,6 +55,7 @@ export const useUserStore = defineStore("userStore", () => {
             (response) => {
                 if (response.status === httpStatusCode.OK) {
                     userInfo.value = response.data.userInfo;
+                    sessionStorage.setItem("userIdx", userInfo.value.userIdx);
                     Swal.fire({
                         icon: "success",
                         title: `${userInfo.value.nickName}님 환영합니다.`,
