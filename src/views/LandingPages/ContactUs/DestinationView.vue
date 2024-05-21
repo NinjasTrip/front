@@ -94,10 +94,6 @@
                     <img class="avatar rounded-circle" width="25px"
                         src="https://github.com/UMCCMAP/server/assets/89764169/74577690-2d2d-4491-a3b8-319d8a947981" />
                 </div>
-                <div class="d-flex flex-column">
-                    <h6 class="m-0">John Doe</h6>
-                    <div class="text-secondary" style="font-size: 0.9rem">2023.4.10 가입</div>
-                </div>
             </div>
             <div class="px-3">
                 <div class="border-bottom d-flex py-2 text-danger">

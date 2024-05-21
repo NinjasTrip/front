@@ -7,11 +7,16 @@
                         <div class="bg-gradient-secondary shadow-secondary border-radius-lg p-3">
                             <h3 class="text-white text-success mb-0">Add a Review</h3>
                         </div>
+                        <div class="user-info d-flex align-items-center">
+                            <img :src="profileImg" alt="Profile" class="avatar rounded-circle">
+                            <div class="ms-2">
+                                <p class="mb-0 text-white">{{ nickName }}</p>
+                                <small class="text-light">User ID: {{ userIdx }}</small>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form id="review-form" method="post" autocomplete="off" @submit.prevent="submitReview">
-                            <MaterialInput class="input-group-static mb-4" type="text" label="Your Name"
-                                v-model="review.name" />
                             <div class="ratings mb-4">
                                 <div class="rating-item">
                                     <label>Recommendation Score:</label>
@@ -48,13 +53,18 @@
 
 <script setup>
 import { ref, defineEmits } from 'vue';
-import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialTextArea from "@/components/MaterialTextArea.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 import vue3starRatings from "vue3-star-ratings";
+import { useUserStore } from "@/stores/user";
+
+const userStore = useUserStore();
+const { userInfo } = storeToRefs(userStore);
+const userIdx = userInfo.value.userIdx;
+const nickName = userInfo.value.nickName;
+const profileImg = userInfo.value.profileImg;
 
 const review = ref({
-    name: '',
     date: '',
     recommendation: 0,
     transportation: 0,

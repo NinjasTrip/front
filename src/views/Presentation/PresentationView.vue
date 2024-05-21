@@ -45,7 +45,7 @@ onUnmounted(() => {
 
 function makeTrip() {
 
-    if (isLogin === true) {
+    if (isLogin.value) {
         router.push('/pages/landing-pages/contact-us');
     } else {
         Swal.fire({
