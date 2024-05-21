@@ -8,37 +8,36 @@
                             <h3 class="text-white mb-0">Add a Review</h3>
                         </div>
                         <div class="user-info bg-white mt-3 d-flex align-items-center justify-content-center">
-                            <img :src="profileImg" alt="Profile" class="avatar rounded-circle">
-                            <h1 class="mb-2 text-dark">{{ nickName }}</h1> <!-- 텍스트 크기 변경 -->
+                            <img :src="profileImg" alt="Profile" class="avatar rounded-circle" />
+                            <h1 class="mb-2 text-dark">{{ nickName }}</h1>
+                            <!-- 텍스트 크기 변경 -->
                         </div>
                     </div>
                     <div class="card-body">
                         <form id="review-form" method="post" autocomplete="off" @submit.prevent="submitReview">
                             <div class="ratings mb-4">
                                 <div class="rating-item">
-                                    <h3 class="text-dark mt-2">Recommendation Score</h3>
+                                    <h4 class="text-dark mt-2">Recommendation Score</h4>
                                     <vue3starRatings v-model="review.recommendation"></vue3starRatings>
                                 </div>
                                 <div class="rating-item">
-                                    <h3 class="text-dark mt-2">Transportation</h3>
+                                    <h4 class="text-dark mt-2">Transportation</h4>
                                     <vue3starRatings v-model="review.transportation"></vue3starRatings>
                                 </div>
                                 <div class="rating-item">
-                                    <h3 class="text-dark mt-2">Environment</h3>
+                                    <h4 class="text-dark mt-2">Environment</h4>
                                     <vue3starRatings v-model="review.environment"></vue3starRatings>
                                 </div>
                                 <div class="rating-item">
-                                    <h3 class="text-dark mt-2">Food Quality</h3>
+                                    <h4 class="text-dark mt-2">Total Quality</h4>
                                     <vue3starRatings v-model="review.food"></vue3starRatings>
                                 </div>
                             </div>
-                            <h3 class="text-dark mt-2">Food Quality</h3>
-                            <MaterialTextArea class="input-group-static" label="Comment" v-model="review.comment"
-                                placeholder="Write your review here..." />
-                            <div class="text-center">
-                                <MaterialButton variant="gradient" color="secondary">Submit Review</MaterialButton>
-                                <MaterialButton variant="gradient" color="secondary" @click="closeModal">Close
-                                </MaterialButton>
+                            <h4 class="text-dark mt-2">Food Quality</h4>
+                            <MaterialTextArea class="input-group-static" label="Comment" v-model="review.comment" placeholder="Write your review here..." />
+                            <div class="text-center mt-5">
+                                <MaterialButton variant="gradient" color="secondary" class="mx-2">Submit Review </MaterialButton>
+                                <MaterialButton variant="gradient" color="secondary" class="mx-2" @click="closeModal"> Close </MaterialButton>
                             </div>
                         </form>
                     </div>
@@ -49,7 +48,7 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from 'vue';
+import { ref, defineEmits } from "vue";
 import MaterialTextArea from "@/components/MaterialTextArea.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 import vue3starRatings from "vue3-star-ratings";
@@ -63,29 +62,29 @@ const nickName = userInfo.value.nickName;
 const profileImg = userInfo.value.profileImg;
 
 const review = ref({
-    date: '',
+    date: "",
     recommendation: 0,
     transportation: 0,
     environment: 0,
     food: 0,
-    comment: ''
+    comment: "",
 });
-const emit = defineEmits(['close']);
+const emit = defineEmits(["close"]);
 
 function submitReview() {
-    console.log('Review submitted:', review.value);
-    emit('close');
+    console.log("Review submitted:", review.value);
+    emit("close");
 }
 
 function closeModal() {
-    emit('close');
+    emit("close");
 }
 </script>
 <style scoped>
 .avatar {
-    width: 100px;
+    width: 120px;
     /* 이미지 크기 증가 */
-    height: 100px;
+    height: 120px;
     /* 이미지 크기 증가 */
 }
 
@@ -151,7 +150,6 @@ function closeModal() {
     justify-content: center;
     /* 버튼을 중앙에 배치 */
 }
-
 
 .MaterialButton {
     font-size: 16px;
