@@ -7,6 +7,7 @@ import setMaterialInput from "@/assets/js/material-input";
 import { useUserStore } from "@/stores/user";
 import { storeToRefs } from "pinia";
 import Swal from "sweetalert2";
+import { httpStatusCode } from "@/util/http-status";
 
 const store = useMarkerStore();
 const userStore = useUserStore();
@@ -32,13 +33,19 @@ function emitClose() {
 
 import { postPlan, getPlan } from "@/api/plan";
 
+/**
+ * 이건 plan list를 뽑아오는 코드이다.
+ * 이를 위해서는 http status를 갖고 오는 import와 api/plan.js를 import를 필수적으로 해주어야 한다.
+ */
 const planList = ref(null);
 
 async function moveToPlan() {
     await getPlan(
+        user,
         (response) => {
+            console.log(response);
             if (response.status === httpStatusCode.OK) {
-                planList.value = response.data;
+                planList.value = response.data.planinfo;
             } else {
                 console.log("계획이 없음!!!!");
             }

@@ -7,9 +7,9 @@ async function postPlan(param, success, fail) {
     await local.post(`/plan/create`, param).then(success).catch(fail);
 }
 
-async function getPlan(success, fail) {
+async function getPlan(userIdx, success, fail) {
     local.defaults.headers["Authorization"] = sessionStorage.getItem("accessToken");
-    await local.get(`/plan`).then(success).catch(fail);
+    await local.get(`/plan/${userIdx}`).then(success).catch(fail);
 }
 
 export { postPlan, getPlan };
