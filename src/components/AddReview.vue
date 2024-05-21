@@ -8,8 +8,9 @@
                             <h3 class="text-white mb-0">Add a Review</h3>
                         </div>
                         <div class="user-info bg-white mt-3 d-flex align-items-center justify-content-center">
-                            <img :src="profileImg" alt="Profile" class="avatar rounded-circle">
-                            <h1 class="mb-2 text-dark">{{ nickName }}</h1> <!-- 텍스트 크기 변경 -->
+                            <img :src="profileImg" alt="Profile" class="avatar rounded-circle" />
+                            <h1 class="mb-2 text-dark">{{ nickName }}</h1>
+                            <!-- 텍스트 크기 변경 -->
                         </div>
                     </div>
                     <div class="card-body">
@@ -39,8 +40,7 @@
                                 <MaterialButton variant="gradient" color="secondary" class="mx-2">Submit Review
                                 </MaterialButton>
                                 <MaterialButton variant="gradient" color="secondary" class="mx-2" @click="closeModal">
-                                    Close
-                                </MaterialButton>
+                                    Close </MaterialButton>
                             </div>
                         </form>
                     </div>
@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from 'vue';
+import { ref, defineEmits } from "vue";
 import MaterialTextArea from "@/components/MaterialTextArea.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 import vue3starRatings from "vue3-star-ratings";
@@ -66,14 +66,14 @@ const nickName = userInfo.value.nickName;
 const profileImg = userInfo.value.profileImg;
 
 const review = ref({
-    date: '',
+    date: "",
     recommendation: 0,
     transportation: 0,
     environment: 0,
     food: 0,
-    comment: ''
+    comment: "",
 });
-const emit = defineEmits(['close']);
+const emit = defineEmits(["close"]);
 
 function submitReview() {
     console.log('Review submitted:', review.value);
@@ -86,7 +86,7 @@ function submitReview() {
 }
 
 function closeModal() {
-    emit('close');
+    emit("close");
 }
 </script>
 <style scoped>
@@ -159,7 +159,6 @@ function closeModal() {
     justify-content: center;
     /* 버튼을 중앙에 배치 */
 }
-
 
 .MaterialButton {
     font-size: 16px;

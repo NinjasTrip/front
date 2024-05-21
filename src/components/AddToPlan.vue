@@ -7,6 +7,7 @@ import setMaterialInput from "@/assets/js/material-input";
 import { useUserStore } from "@/stores/user";
 import { storeToRefs } from "pinia";
 import Swal from "sweetalert2";
+import { httpStatusCode } from "@/util/http-status";
 
 const store = useMarkerStore();
 const userStore = useUserStore();
@@ -24,15 +25,39 @@ const form = ref({
     time: "", // 시간 입력을 위한 새 속성
 });
 
-
-
 const emit = defineEmits(["close"]);
 
 function emitClose() {
     emit("close");
 }
 
-import { postPlan } from "@/api/plan";
+import { postPlan, getPlan } from "@/api/plan";
+
+/**
+ * 이건 plan list를 뽑아오는 코드이다.
+ * 이를 위해서는 http status를 갖고 오는 import와 api/plan.js를 import를 필수적으로 해주어야 한다.
+ */
+const planList = ref(null);
+
+async function moveToPlan() {
+    await getPlan(
+        user,
+        (response) => {
+            console.log(response);
+            if (response.status === httpStatusCode.OK) {
+                planList.value = response.data.planinfo;
+            } else {
+                console.log("계획이 없음!!!!");
+            }
+        },
+        async (error) => {
+            console.error("g[토큰 만료되어 사용 불가능.] : ", error.response.status, error.response.statusText);
+            isValidToken.value = false;
+
+            await tokenRegenerate();
+        }
+    );
+}
 
 async function handleSubmit() {
     console.log(form.value);
@@ -42,14 +67,17 @@ async function handleSubmit() {
         title: "계획을 추가하셨습니다",
         text: "계획을 확인하시겠습니까?",
         showCancelButton: true,
-        confirmButtonText: '예',
-        cancelButtonText: '아니오',
-        confirmButtonColor: '#429f50',
-        cancelButtonColor: '#d33',
-    }).then(result => {
-        if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+        confirmButtonText: "예",
+        cancelButtonText: "아니오",
+        confirmButtonColor: "#429f50",
+        cancelButtonColor: "#d33",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // 만약 모달창에서 confirm 버튼을 눌렀다면
             // ...실행
-        } else if (result.isDismissed) { // 만약 모달창에서 cancel 버튼을 눌렀다면
+            moveToPlan();
+        } else if (result.isDismissed) {
+            // 만약 모달창에서 cancel 버튼을 눌렀다면
             // ...실행
         }
     });
@@ -86,29 +114,19 @@ onMounted(() => {
                         </div>
                     </div>
                     <div class="card-body">
-                        <p class="pb-3">For further questions, including partnership opportunities, please email
-                            fund88@naver.com or contact using our contact form.</p>
+                        <p class="pb-3">For further questions, including partnership opportunities, please email fund88@naver.com or contact using our contact form.</p>
                         <form id="contact-form" method="post" autocomplete="off" @submit.prevent="handleSubmit">
                             <div class="d-flex flex-wrap">
-                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Place Name"
-                                    v-model="form.placeName" />
-                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Address"
-                                    v-model="form.address" />
-                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Phone"
-                                    v-model="form.phone" />
-                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Category"
-                                    v-model="form.category" />
-                                <MaterialInput class="input-group-static mb-4 flex-fill" type="date" label="Date"
-                                    v-model="form.date" />
-                                <MaterialInput class="input-group-static mb-4 flex-fill" type="time" label="Time"
-                                    v-model="form.time" />
+                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Place Name" v-model="form.placeName" />
+                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Address" v-model="form.address" />
+                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Phone" v-model="form.phone" />
+                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Category" v-model="form.category" />
+                                <MaterialInput class="input-group-static mb-4 flex-fill" type="date" label="Date" v-model="form.date" />
+                                <MaterialInput class="input-group-static mb-4 flex-fill" type="time" label="Time" v-model="form.time" />
                             </div>
                             <div class="text-center mt-3">
-                                <MaterialButton variant="gradient" color="secondary" class="mx-2">Add
-                                    Destination to my
-                                    plan </MaterialButton>
-                                <MaterialButton variant="gradient" color="secondary" class="mx-2" @click="emitClose">
-                                    Close </MaterialButton>
+                                <MaterialButton variant="gradient" color="secondary" class="mx-2">Add Destination to my plan </MaterialButton>
+                                <MaterialButton variant="gradient" color="secondary" class="mx-2" @click="emitClose"> Close </MaterialButton>
                             </div>
                         </form>
                     </div>
