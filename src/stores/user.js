@@ -12,7 +12,7 @@ export const useUserStore = defineStore("userStore", () => {
     // 테스트를 위해 임시로 true를 발행
     const isLogin = ref(false);
     const isLoginError = ref(false);
-    const userInfo = ref(null);
+    const userInfo = ref("강병헌");
     const isValidToken = ref(false);
 
     const userLogin = async (loginUser) => {

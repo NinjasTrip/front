@@ -1,12 +1,12 @@
 <script setup>
 import { onMounted, onUnmounted } from "vue";
+import { useRouter } from 'vue-router';
 import { storeToRefs } from "pinia";
 
 //example components
 import DefaultNavbar from "@/examples/navbars/NavbarDefault.vue";
 import BeforeLoginNav from "@/examples/navbars/NavbarBeforeLogin.vue";
 import DefaultFooter from "@/examples/footers/FooterDefault.vue";
-
 //image
 import bg0 from "@/assets/img/bg9.jpg";
 //sections
@@ -14,11 +14,11 @@ import Information from "./Sections/AboutInformation.vue";
 //dep
 import Typed from "typed.js";
 import { useUserStore } from "@/stores/user";
+import Swal from "sweetalert2";
 
 const userStore = useUserStore();
-
 const { isLogin } = storeToRefs(userStore);
-
+const router = useRouter();
 const body = document.getElementsByTagName("body")[0];
 //hooks
 onMounted(() => {
@@ -42,6 +42,32 @@ onUnmounted(() => {
     body.classList.remove("about-us");
     body.classList.remove("bg-gray-200");
 });
+
+function makeTrip() {
+
+    if (isLogin === true) {
+        router.push('/pages/landing-pages/contact-us');
+    } else {
+        Swal.fire({
+            icon: 'info',
+            title: '로그인 후 이용 가능합니다.',
+            text: '로그인 하시겠습니까?',
+            showCancelButton: true,
+            confirmButtonText: '예',
+            cancelButtonText: '아니오',
+            confirmButtonColor: '#429f50',
+            cancelButtonColor: '#d33',
+
+        }).then(result => {
+            if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+                router.push('/user/login');
+            } else if (result.isDismissed) { // 만약 모달창에서 cancel 버튼을 눌렀다면
+                // ...실행
+            }
+        });
+    }
+}
+
 </script>
 
 <template>
@@ -64,9 +90,11 @@ onUnmounted(() => {
                             <h1>Happy</h1>
                         </div>
                         <p class="lead mb-4 text-white opacity-8">
-                            Make every trip unforgettable with Ninja Trip! Plan your destinations with ease, set detailed itineraries, and share your experiences by writing reviews after your travels.
+                            Make every trip unforgettable with Ninja Trip! Plan your destinations with ease, set
+                            detailed
+                            itineraries, and share your experiences by writing reviews after your travels.
                         </p>
-                        <a href="/pages/landing-pages/contact-us" class="btn bg-white text-dark"> Make your Trip </a>
+                        <a class="btn bg-white text-dark" @click="makeTrip"> Make your Trip </a>
                     </div>
                 </div>
             </div>
