@@ -5,37 +5,34 @@
                 <div class="card d-flex blur justify-content-center shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
                         <div class="bg-gradient-secondary shadow-secondary border-radius-lg p-3">
-                            <h3 class="text-white text-success mb-0">Add a Review</h3>
+                            <h3 class="text-white mb-0">Add a Review</h3>
                         </div>
-                        <div class="user-info d-flex align-items-center">
+                        <div class="user-info bg-white mt-3 d-flex align-items-center justify-content-center">
                             <img :src="profileImg" alt="Profile" class="avatar rounded-circle">
-                            <div class="ms-2">
-                                <p class="mb-0 text-white">{{ nickName }}</p>
-                                <small class="text-light">User ID: {{ userIdx }}</small>
-                            </div>
+                            <h1 class="mb-2 text-dark">{{ nickName }}</h1> <!-- 텍스트 크기 변경 -->
                         </div>
                     </div>
                     <div class="card-body">
                         <form id="review-form" method="post" autocomplete="off" @submit.prevent="submitReview">
                             <div class="ratings mb-4">
                                 <div class="rating-item">
-                                    <label>Recommendation Score:</label>
+                                    <h3 class="text-dark mt-2">Recommendation Score</h3>
                                     <vue3starRatings v-model="review.recommendation"></vue3starRatings>
                                 </div>
                                 <div class="rating-item">
-                                    <label>Transportation:</label>
+                                    <h3 class="text-dark mt-2">Transportation</h3>
                                     <vue3starRatings v-model="review.transportation"></vue3starRatings>
                                 </div>
                                 <div class="rating-item">
-                                    <label>Environment:</label>
+                                    <h3 class="text-dark mt-2">Environment</h3>
                                     <vue3starRatings v-model="review.environment"></vue3starRatings>
                                 </div>
                                 <div class="rating-item">
-                                    <label>Food Quality:</label>
+                                    <h3 class="text-dark mt-2">Food Quality</h3>
                                     <vue3starRatings v-model="review.food"></vue3starRatings>
                                 </div>
                             </div>
-                            <div>종합 의견</div>
+                            <h3 class="text-dark mt-2">Food Quality</h3>
                             <MaterialTextArea class="input-group-static" label="Comment" v-model="review.comment"
                                 placeholder="Write your review here..." />
                             <div class="text-center">
@@ -56,6 +53,7 @@ import { ref, defineEmits } from 'vue';
 import MaterialTextArea from "@/components/MaterialTextArea.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 import vue3starRatings from "vue3-star-ratings";
+import { storeToRefs } from "pinia";
 import { useUserStore } from "@/stores/user";
 
 const userStore = useUserStore();
@@ -84,6 +82,22 @@ function closeModal() {
 }
 </script>
 <style scoped>
+.avatar {
+    width: 100px;
+    /* 이미지 크기 증가 */
+    height: 100px;
+    /* 이미지 크기 증가 */
+}
+
+.user-info {
+    border-radius: 15px;
+    /* 모서리 둥글게 */
+    padding: 10px;
+    /* 커스텀 패딩 값 *
+    /* 배경색 흰색 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .rating-item {
     display: flex;
     justify-content: space-between;
