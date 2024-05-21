@@ -90,3 +90,15 @@ const updateValue = (event) => {
       :disabled="isDisabled" />
   </div>
 </template>
+<style>
+.label-style {
+  font-size: 24px;
+  /* h3와 같은 글씨 크기 */
+  color: #343a40;
+  /* 어두운 글씨 색상 */
+  margin-top: 8px;
+  /* 상단 여백 조정 */
+  font-weight: bold;
+  /* 글씨 두께 */
+}
+</style>
