@@ -19,6 +19,14 @@
                         <!-- 조건부 렌더링을 통해 selectedDate가 있을 때만 ListDay 뷰 렌더링 -->
                         <FullCalendar :options="listOptions" />
                     </div>
+                    <div class="rounded-calendar md-2" style="margin-top: 50px;">
+                        <MaterialButton variant="gradient" color="secondary" class="mx-3 mt-3"> Submit Review
+                        </MaterialButton>
+                        <MaterialButton variant="gradient" color="secondary" class="mx-3 mt-3">
+                            Fix Diary With Dall-E</MaterialButton>
+                        <MaterialButton variant="gradient" color="secondary" class="mx-3 mt-3">
+                            Share on InstaGram </MaterialButton>
+                    </div>
                 </div>
                 <div
                     class="col-6 offset-6 d-lg-flex d-none h-100 my-auto position-absolute top-3 start-0 text-center justify-content-center flex-column">
@@ -40,7 +48,7 @@ import listPlugin from '@fullcalendar/list';
 import DefaultNavbar from "@/examples/navbars/NavbarDefault.vue";
 import DefaultFooter from "@/examples/footers/FooterDefault.vue";
 import bgImage from "@/assets/img/bgg4.png";
-
+import MaterialButton from "@/components/MaterialButton.vue";
 const backgroundStyle = {
     backgroundImage: `url(${bgImage})`,
 };
@@ -67,7 +75,7 @@ const listOptions = {
 <style scoped>
 .rounded-calendar {
     border-radius: 15px;
-    padding: 30px;
+    padding: 10px;
     background-color: #ffffff;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
