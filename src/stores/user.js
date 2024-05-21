@@ -2,6 +2,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { defineStore } from "pinia";
 import { jwtDecode } from "jwt-decode";
+import Swal from "sweetalert2";
 
 import { userConfirm, findById, tokenRegeneration, logout } from "@/api/user";
 import { httpStatusCode } from "@/util/http-status";
@@ -12,7 +13,7 @@ export const useUserStore = defineStore("userStore", () => {
     // 테스트를 위해 임시로 true를 발행
     const isLogin = ref(false);
     const isLoginError = ref(false);
-    const userInfo = ref("강병헌");
+    const userInfo = ref("null");
     const isValidToken = ref(false);
 
     const userLogin = async (loginUser) => {
@@ -32,6 +33,11 @@ export const useUserStore = defineStore("userStore", () => {
                 }
             },
             (error) => {
+                Swal.fire({
+                    icon: "error",
+                    title: "로그인 실패.",
+                    text: "잘못된 아이디 혹은 비밀번호입니다.",
+                });
                 console.log("로그인 실패!!!!");
                 isLogin.value = false;
                 isLoginError.value = true;
@@ -49,6 +55,11 @@ export const useUserStore = defineStore("userStore", () => {
             (response) => {
                 if (response.status === httpStatusCode.OK) {
                     userInfo.value = response.data.userInfo;
+                    Swal.fire({
+                        icon: "success",
+                        title: `${userInfo.value.nickName}님 환영합니다.`,
+                        text: `NinjaTrip과 함께 즐거운 여행을 그려보세요.`,
+                    });
                 } else {
                     console.log("유저 정보 없음!!!!");
                 }
@@ -102,6 +113,11 @@ export const useUserStore = defineStore("userStore", () => {
     };
 
     const userLogout = async () => {
+        Swal.fire({
+            icon: "success",
+            title: `${userInfo.value.nickName}님 안녕히 가십시요.`,
+            text: `NinjaTrip과 함께 즐거운 여행 되셨기를 바랍니다.`,
+        });
         console.log("로그아웃 아이디 : " + userInfo.value.userIdx);
         await logout(
             userInfo.value.userIdx,

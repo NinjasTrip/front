@@ -28,7 +28,7 @@
                                     <vue3starRatings v-model="review.environment"></vue3starRatings>
                                 </div>
                                 <div class="rating-item">
-                                    <h4 class="text-dark mt-2">Food Quality</h4>
+                                    <h4 class="text-dark mt-2">Total Quality</h4>
                                     <vue3starRatings v-model="review.food"></vue3starRatings>
                                 </div>
                             </div>
@@ -85,9 +85,9 @@ function closeModal() {
 </script>
 <style scoped>
 .avatar {
-    width: 100px;
+    width: 120px;
     /* 이미지 크기 증가 */
-    height: 100px;
+    height: 120px;
     /* 이미지 크기 증가 */
 }
 
