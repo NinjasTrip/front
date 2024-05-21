@@ -38,7 +38,7 @@ import DefaultNavbar from "@/examples/navbars/NavbarBeforeLogin.vue";
 import Header from "@/examples/Header.vue";
 
 //Vue Material Kit 2 components
-import MaterialInput from "@/components/MaterialInput.vue";
+import LoginInput from "@/components/LoginInput.vue";
 import MaterialSwitch from "@/components/MaterialSwitch.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 
@@ -72,7 +72,7 @@ onMounted(() => {
                             </div>
                             <div class="card-body">
                                 <form role="form" class="text-start" @submit.prevent="login">
-                                    <MaterialInput
+                                    <LoginInput
                                         v-model="loginUser.email"
                                         id="email"
                                         class="input-group-outline my-3"
@@ -82,7 +82,7 @@ onMounted(() => {
                                         }"
                                         type="email"
                                     />
-                                    <MaterialInput
+                                    <LoginInput
                                         v-model="loginUser.password"
                                         id="password"
                                         class="input-group-outline mb-3"
