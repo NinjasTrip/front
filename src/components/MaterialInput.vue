@@ -81,12 +81,12 @@ const updateValue = (event) => {
 
 <template>
   <div class="input-group">
-    <label v-if="label" :class="label.class">{{
-      typeof label == "string" ? label : label.text
-    }}</label>
-    <span v-if="icon" class="input-group-text"><i class="fas" :class="`fa-${icon}`" aria-hidden="true"></i></span>
+    <label v-if="label" :class="[typeof label === 'object' && label.class ? label.class : '', 'label-style']">
+      {{ typeof label === 'object' ? label.text : label }}
+    </label>
+    <span v-if="icon" class="input-group-text"><i :class="`fa-${icon}`" aria-hidden="true"></i></span>
     <input :id="id" :type="type" class="form-control" :class="[getClasses(size, success, error), inputClass]"
-      :value="modelValue" @input="updateValue" :placeholder="placeholder" :isRequired="isRequired"
+      :value="modelValue" @input="updateValue" :placeholder="placeholder" :required="isRequired"
       :disabled="isDisabled" />
   </div>
 </template>
