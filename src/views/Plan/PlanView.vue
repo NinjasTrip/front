@@ -168,10 +168,10 @@ export default {
         }
         async function handleCommentInput() {
             const { value: inputComment } = await Swal.fire({
-                title: '코멘트를 입력하세요',
+                title: '여행기록 입력하세요',
                 input: 'textarea',
-                inputLabel: '당신의 코멘트',
-                inputPlaceholder: '여기에 코멘트를 입력하세요...',
+                inputLabel: '당신의 기록',
+                inputPlaceholder: '여기에 기록 입력하세요...',
                 showCancelButton: true,
                 confirmButtonText: '제출',
                 cancelButtonText: '취소',
@@ -192,6 +192,14 @@ export default {
             }
         }
         async function postComment(userIdx, date, comment) {
+            Swal.fire({
+                title: '로딩 중...',
+                text: `${userInfo.value.nickName}님의 다이어리를 만드는 중이에요.`,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
             try {
                 const response = await axios.post('http://localhost:8080/plan/create/diary', null, {
                     params: {
@@ -200,11 +208,12 @@ export default {
                         comment: comment
                     }
                 });
+                Swal.close(); // 로딩 스피너를 닫습니다.
                 if (response.status === 200) {
                     Swal.fire({
                         icon: 'success',
-                        title: '코멘트 제출 완료',
-                        text: '코멘트가 성공적으로 제출되었습니다.',
+                        title: '다이어리 제작 완료',
+                        text: `NinjaTrip이 ${userInfo.value.nickName}님의 다이어리를 완성했습니다.`,
                     });
                 } else {
                     throw new Error('코멘트 제출 실패');

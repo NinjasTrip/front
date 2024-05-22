@@ -50,7 +50,7 @@ async function moveToPlan() {
             }
         },
         async (error) => {
-            console.error("g[토큰 만료되어 사용 불가능.] : ", error.response.status, error.response.statusText);
+            console.error("[토큰 만료되어 사용 불가능.] : ", error.response.status, error.response.statusText);
             isValidToken.value = false;
 
             await tokenRegenerate();
