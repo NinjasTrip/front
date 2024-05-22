@@ -5,6 +5,8 @@ import SignUpView from "@/views/LandingPages/User/SignUpView.vue";
 import DestinationView from "@/views/LandingPages/ContactUs/DestinationView.vue";
 import PlanView from "@/views/Plan/PlanView.vue";
 import BoardList from "@/views/Board/BoardList.vue";
+import BoardWrite from "@/views/Board/BoardWrite.vue";
+import BoardDetail from "@/views/Board/BoardDetail.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +40,16 @@ const router = createRouter({
             path: "/board",
             name: "board",
             component: BoardList,
+        },
+        {
+            path: "/board/write",
+            name: "board-write",
+            component: BoardWrite,
+        },
+        {
+            path: "/board/${boardIdx}",
+            name: "article-view",
+            component: BoardDetail,
         },
     ],
 });

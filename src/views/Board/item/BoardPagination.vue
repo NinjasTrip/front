@@ -3,13 +3,14 @@
 import MaterialPagination from "@/components/MaterialPagination.vue";
 import MaterialPaginationItem from "@/components/MaterialPaginationItem.vue";
 </script>
+
 <template>
     <section class="py-7">
         <div class="container">
-            <div class="row justify-space-between py-2">
-                <div class="col-lg-4 mx-auto">
-                    <MaterialPagination>
-                        <MaterialPaginationItem prev class="ms-auto" />
+            <div class="row justify-content-center py-2">
+                <div class="col-lg-4">
+                    <MaterialPagination class="d-flex justify-content-center">
+                        <MaterialPaginationItem prev />
                         <MaterialPaginationItem label="1" active />
                         <MaterialPaginationItem label="2" />
                         <MaterialPaginationItem label="3" />
