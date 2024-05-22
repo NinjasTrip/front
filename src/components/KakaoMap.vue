@@ -28,6 +28,8 @@ const props = defineProps({
     searchKeyword: String,
 });
 
+const emits = defineEmits(["placeName"]);
+
 const mapRef = ref(null);
 const map = ref<kakao.maps.Map>();
 const markerList = ref<KakaoMapMarkerListItem[]>([]);
@@ -93,6 +95,7 @@ const onClickMapMarker = (markerItem: KakaoMapMarkerListItem): void => {
             category: details[2],
             placeName: details[3],
         });
+        emits("placeName", details[3]);
     }
 };
 </script>

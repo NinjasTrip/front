@@ -20,8 +20,7 @@
                     <fieldset>
                         <select v-model="selectSido" @change="onSidoChange" class="form-control form-select">
                             <option value="">시도 선택</option>
-                            <option v-for="sido in sidoList" :key="sido.sidoCode" :value="sido.sidoCode">{{
-                                sido.sidoName }}</option>
+                            <option v-for="sido in sidoList" :key="sido.sidoCode" :value="sido.sidoCode">{{ sido.sidoName }}</option>
                         </select>
                     </fieldset>
                 </div>
@@ -29,8 +28,7 @@
                     <fieldset>
                         <select v-model="selectGungu" @change="onGunguChange" class="form-control form-select">
                             <option value="">군구 선택</option>
-                            <option v-for="gungu in gunguList" :key="gungu.gunguCode" :value="gungu.gunguCode">{{
-                                gungu.gunguName }}</option>
+                            <option v-for="gungu in gunguList" :key="gungu.gunguCode" :value="gungu.gunguCode">{{ gungu.gunguName }}</option>
                         </select>
                     </fieldset>
                 </div>
@@ -38,17 +36,14 @@
                     <fieldset>
                         <select v-model="selectDong" class="form-control form-select">
                             <option value="">동 선택</option>
-                            <option v-for="dong in dongList" :key="dong.dongCode" :value="dong.dongCode">{{
-                                dong.dongName }}</option>
+                            <option v-for="dong in dongList" :key="dong.dongCode" :value="dong.dongCode">{{ dong.dongName }}</option>
                         </select>
                     </fieldset>
                 </div>
             </div>
-            <MaterialInput v-model="customKeyword" class="input-group-dynamic mb-4" icon="search" type="text"
-                placeholder="Search" />
+            <MaterialInput v-model="customKeyword" class="input-group-dynamic mb-4" icon="search" type="text" placeholder="Search" />
             <div class="col-md-12">
-                <MaterialButton @click="onSearchClick" type="submit" variant="gradient" color="secondary" fullWidth>
-                    Search</MaterialButton>
+                <MaterialButton @click="onSearchClick" type="submit" variant="gradient" color="secondary" fullWidth> Search</MaterialButton>
             </div>
         </div>
     </div>
@@ -63,23 +58,21 @@
             </div>
             <!-- contents -->
             <div class="px-3">
-                <div class=" d-flex py-2">
+                <div class="d-flex py-2">
                     <div class="text-secondary w-25">전화번호</div>
                     <div>{{ markerStore.phone }}</div>
                 </div>
-                <div class=" d-flex py-2">
+                <div class="d-flex py-2">
                     <div class="text-secondary w-25">카테고리</div>
                     <div>{{ markerStore.category }}</div>
                 </div>
-                <div class=" d-flex py-2">
+                <div class="d-flex py-2">
                     <div class="text-secondary w-25">주소</div>
                     <div>{{ markerStore.address }}</div>
                 </div>
             </div>
             <div class="d-flex py-2 justify-content-center">
-                <MaterialButton @click="openModal1" type="submit" variant="gradient" color="secondary">Add to My Plan
-                </MaterialButton>
-
+                <MaterialButton @click="openModal1" type="submit" variant="gradient" color="secondary">Add to My Plan </MaterialButton>
             </div>
         </div>
         <div class="py-1 bg-secondary"></div>
@@ -91,8 +84,7 @@
             </div>
             <div class="border-top border-bottom d-flex align-items-center p-2">
                 <div class="text-secondary ps-2 pe-3">
-                    <img class="avatar rounded-circle" width="25px"
-                        src="https://github.com/UMCCMAP/server/assets/89764169/74577690-2d2d-4491-a3b8-319d8a947981" />
+                    <img class="avatar rounded-circle" width="25px" src="https://github.com/UMCCMAP/server/assets/89764169/74577690-2d2d-4491-a3b8-319d8a947981" />
                 </div>
             </div>
             <div class="px-3">
@@ -159,8 +151,9 @@ import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 import AddToPlan from "@/components/AddToPlan.vue";
 import AddReview from "@/components/AddReview.vue";
+import { httpStatusCode } from "@/util/http-status";
 import { useMarkerStore } from "@/stores/useMarkerStore";
-
+import { storeToRefs } from "pinia";
 
 const modalOpen1 = ref(false);
 const modalOpen2 = ref(false);
@@ -180,16 +173,16 @@ const markerStore = useMarkerStore();
 
 const openModal1 = () => {
     modalOpen1.value = true;
-}
+};
 const closeModal1 = () => {
     modalOpen1.value = false;
-}
+};
 const openModal2 = () => {
     modalOpen2.value = true;
-}
+};
 const closeModal2 = () => {
     modalOpen2.value = false;
-}
+};
 const combinedKeyword = computed(() => {
     let keyword = "";
     if (selectSido.value) keyword += sidoList.value.find((sido) => sido.sidoCode === selectSido.value)?.sidoName || "";
@@ -203,6 +196,69 @@ const onSearchClick = () => {
     searchKeyword.value = combinedKeyword.value;
     console.log("Search Clicked - Search Keyword:", searchKeyword.value);
 };
+
+/**
+ * Get Reviews
+ *
+ */
+import { useUserStore } from "@/stores/user";
+import { getReview } from "@/api/review";
+
+const userStore = useUserStore();
+const { userInfo } = storeToRefs(userStore);
+
+// const userIdx = userInfo.value.userIdx;
+
+const review = ref({
+    reviewIdx: "",
+    writerIdx: "",
+    place: "",
+    comment: "",
+    total: 0,
+    traffic: 0,
+    travel: 0,
+    food: 0,
+    createdAt: "",
+    nickname: "",
+    profileImg: "",
+});
+
+async function getReviewList(placeName) {
+    try {
+        const response = await getReview(placeName);
+        console.log("테스트 중 " + response);
+        console.log("테스트 중 " + response.data);
+        console.log("테스트 중 " + response.data.value);
+        console.log("테스트 중 " + JSON.stringify(response.data.reviewList, null, 2));
+        if (response.status === httpStatusCode.OK) {
+            review.value = response.data.reviewList;
+        } else {
+            console.log("계획이 없음!!!!");
+        }
+    } catch (error) {
+        console.error("리뷰 데이터를 가져오는 중 오류 발생:", error);
+        if (error.response && error.response.status === httpStatusCode.UNAUTHORIZED) {
+            isValidToken.value = false;
+            await tokenRegenerate();
+        }
+    }
+}
+
+// markerStore.placeName이 변경될 때마다 getReviewList 실행
+watch(
+    () => markerStore.placeName,
+    async (newPlaceName) => {
+        if (newPlaceName) {
+            await getReviewList(newPlaceName);
+        } else {
+            console.warn("markerStore.placeName이 비어 있습니다.");
+        }
+    }
+);
+
+/**
+ * end of get Review
+ */
 
 // 시도 선택에 따라 군구 데이터 업데이트
 const onSidoChange = () => {
@@ -237,8 +293,7 @@ const onSidoChange = () => {
             { gunguCode: "0122", gunguName: "은평구" },
             { gunguCode: "0123", gunguName: "종로구" },
             { gunguCode: "0124", gunguName: "중구" },
-            { gunguCode: "0125", gunguName: "중랑구" }
-
+            { gunguCode: "0125", gunguName: "중랑구" },
         ];
     } else if (selectSido.value === "02") {
         gunguList.value = [
