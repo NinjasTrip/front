@@ -17,16 +17,20 @@
                     class="col-4 offset-1 d-lg-flex d-none h-100 my-auto position-absolute top-3 start-0 text-center justify-content-center flex-column">
                     <div class="rounded-calendar">
                         <FullCalendar :key="listCalendarKey" :options="listOptions" />
+
                         <div v-if="diaryData" class="diary-entry">
-                            <h4 class="text-dark mt-2">Your Travel Image</h4>
+                            <h3 class="text-dark mt-5">Your Travel Image</h3>
                             <img :src="diaryData.imageUrl" alt="Diary Image" class="diary-image" />
-                            <h4 class="text-dark mt-2">Comment</h4>
-                            <p class="diary-comment">{{ diaryData.comment }}</p>
+                            <div class="comment-box">
+                                <h3 class="text-dark mt-5">Comment</h3>
+                                <p class="diary-comment">{{ diaryData.comment }}</p>
+                            </div>
                         </div>
-                        <MaterialButton variant="gradient" color="secondary" class="mx-3 mt-3">
+
+                        <MaterialButton variant="gradient" color="secondary" class="mx-3 mt-5" @click="makeImage">
                             Fix Diary With Dall-E
                         </MaterialButton>
-                        <MaterialButton variant="gradient" color="secondary" class="mx-3 mt-3">
+                        <MaterialButton variant="gradient" color="secondary" class="mx-3 mt-5">
                             Share on InstaGram
                         </MaterialButton>
                     </div>
@@ -59,6 +63,7 @@ import bgImage from "@/assets/img/bgg4.png";
 import MaterialButton from "@/components/MaterialButton.vue";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@/stores/user";
+import Swal from "sweetalert2";
 
 export default {
     components: {
@@ -74,7 +79,7 @@ export default {
         const backgroundStyle = ref({
             backgroundImage: `url(${bgImage})`,
         });
-
+        const comment = ref("");
         const events = ref([]);
         const listCalendarKey = ref(0); // 캘린더 리렌더링을 위한 키
         const selectedDate = ref(null); // 클릭된 날짜를 저장할 ref
@@ -140,10 +145,84 @@ export default {
             }
         }
 
+        function makeImage() {
+            Swal.fire({
+                icon: "info",
+                title: "이미지 생성",
+                text: "DALL-E를 활용해 다이어리를 생성 하시겠습니까?",
+                showCancelButton: true,
+                confirmButtonText: "예",
+                cancelButtonText: "아니오",
+                confirmButtonColor: "#429f50",
+                cancelButtonColor: "#d33",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // 만약 모달창에서 confirm 버튼을 눌렀다면
+                    // ...실행
+                    handleCommentInput()
+                } else if (result.isDismissed) {
+                    // 만약 모달창에서 cancel 버튼을 눌렀다면
+                    // ...실행
+                }
+            });
+        }
+        async function handleCommentInput() {
+            const { value: inputComment } = await Swal.fire({
+                title: '코멘트를 입력하세요',
+                input: 'textarea',
+                inputLabel: '당신의 코멘트',
+                inputPlaceholder: '여기에 코멘트를 입력하세요...',
+                showCancelButton: true,
+                confirmButtonText: '제출',
+                cancelButtonText: '취소',
+                confirmButtonColor: '#429f50',
+                cancelButtonColor: '#d33',
+                inputValidator: (value) => {
+                    if (!value) {
+                        return '내용을 입력해야 합니다!';
+                    }
+                }
+            });
+
+            if (inputComment) {
+                comment.value = inputComment;
+                console.log("입력된 코멘트:", comment.value);
+                // 여기서 추가적인 처리 로직을 작성할 수 있습니다.
+                await postComment(userInfo.value.userIdx, selectedDate.value, comment.value);
+            }
+        }
+        async function postComment(userIdx, date, comment) {
+            try {
+                const response = await axios.post('http://localhost:8080/plan/create/diary', null, {
+                    params: {
+                        userIdx: userIdx,
+                        date: date,
+                        comment: comment
+                    }
+                });
+                if (response.status === 200) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '코멘트 제출 완료',
+                        text: '코멘트가 성공적으로 제출되었습니다.',
+                    });
+                } else {
+                    throw new Error('코멘트 제출 실패');
+                }
+            } catch (error) {
+                console.error('코멘트 제출 중 오류 발생:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: '오류 발생',
+                    text: '코멘트 제출 중 오류가 발생했습니다. 다시 시도해 주세요.',
+                });
+            }
+        }
 
         onMounted(fetchEvents);
 
         return {
+            makeImage,
             backgroundStyle,
             calendarOptions,
             listOptions,
@@ -160,7 +239,7 @@ export default {
 <style scoped>
 .rounded-calendar {
     border-radius: 15px;
-    padding: 10px;
+    padding: 40px;
     background-color: #ffffff;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     max-height: 1000px;
@@ -170,28 +249,40 @@ export default {
 }
 
 .diary-entry {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    /* Aligns content to the left */
     width: 100%;
-    /* 이미지 컨테이너의 너비를 100%로 설정 */
+}
+
+.comment-box {
+    background-color: #f8f9fa;
+    /* Light grey background */
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    /* Ensures the box takes full width of its container */
+    border: 1px solid #dee2e6;
+    /* Light grey border for subtle definition */
+    margin-top: 10px;
 }
 
 .diary-image {
     width: 100%;
-    /* 이미지의 너비를 100%로 설정 */
     height: auto;
-    /* 이미지의 높이를 자동으로 설정 */
     object-fit: contain;
-    /* 이미지가 컨테이너에 맞도록 조절 */
     border: 5px solid #6c757d;
-    /* 테두리를 secondary 색상으로 설정 */
     filter: grayscale(30%);
-    /* 이미지를 흑백으로 설정 */
     border-radius: 15px;
-    /* 테두리 모서리를 둥글게 설정 */
+    margin-bottom: 10px;
+    /* Adds space between the image and the comment box */
 }
 
 .diary-comment {
     font-size: 1.2em;
-    margin-top: 10px;
+    color: #495057;
+    /* Dark grey color for text for better readability */
 }
 </style>

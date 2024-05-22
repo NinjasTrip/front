@@ -12,7 +12,6 @@ import { httpStatusCode } from "@/util/http-status";
 const store = useMarkerStore();
 const userStore = useUserStore();
 const { userInfo } = storeToRefs(userStore);
-
 const user = userInfo.value.userIdx;
 
 const form = ref({
@@ -114,19 +113,28 @@ onMounted(() => {
                         </div>
                     </div>
                     <div class="card-body">
-                        <p class="pb-3">For further questions, including partnership opportunities, please email fund88@naver.com or contact using our contact form.</p>
+                        <p class="pb-3">For further questions, including partnership opportunities, please email
+                            fund88@naver.com or contact using our contact form.</p>
                         <form id="contact-form" method="post" autocomplete="off" @submit.prevent="handleSubmit">
                             <div class="d-flex flex-wrap">
-                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Place Name" v-model="form.placeName" />
-                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Address" v-model="form.address" />
-                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Phone" v-model="form.phone" />
-                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Category" v-model="form.category" />
-                                <MaterialInput class="input-group-static mb-4 flex-fill" type="date" label="Date" v-model="form.date" />
-                                <MaterialInput class="input-group-static mb-4 flex-fill" type="time" label="Time" v-model="form.time" />
+                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Place Name"
+                                    v-model="form.placeName" />
+                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Address"
+                                    v-model="form.address" />
+                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Phone"
+                                    v-model="form.phone" />
+                                <MaterialInput class="input-group-static mb-4 flex-fill" type="text" label="Category"
+                                    v-model="form.category" />
+                                <MaterialInput class="input-group-static mb-4 flex-fill" type="date" label="Date"
+                                    v-model="form.date" />
+                                <MaterialInput class="input-group-static mb-4 flex-fill" type="time" label="Time"
+                                    v-model="form.time" />
                             </div>
                             <div class="text-center mt-3">
-                                <MaterialButton variant="gradient" color="secondary" class="mx-2">Add Destination to my plan </MaterialButton>
-                                <MaterialButton variant="gradient" color="secondary" class="mx-2" @click="emitClose"> Close </MaterialButton>
+                                <MaterialButton variant="gradient" color="secondary" class="mx-2">Add Destination to my
+                                    plan </MaterialButton>
+                                <MaterialButton variant="gradient" color="secondary" class="mx-2" @click="emitClose">
+                                    Close </MaterialButton>
                             </div>
                         </form>
                     </div>
