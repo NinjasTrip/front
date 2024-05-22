@@ -47,7 +47,7 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { listArticle } from "@/api/board.js";
 
-import VSelect from "../common/VSelect.vue";
+import VSelect from "@/components/common/VSelect.vue";
 import BoardListItem from "./item/BoardListItem.vue";
 import NavbarDefault from "@/examples/navbars/NavbarDefault.vue";
 import FooterDefault from "@/examples/footers/FooterDefault.vue";
@@ -69,7 +69,7 @@ const currentPage = ref(1);
 const totalPage = ref(0);
 const param = ref({
     pgno: currentPage.value,
-    spp: VITE_ARTICLE_LIST_SIZE,
+    // spp: VITE_ARTICLE_LIST_SIZE,
     key: "",
     word: "",
 });
