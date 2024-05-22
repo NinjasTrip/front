@@ -8,8 +8,8 @@
                             <h3 class="text-white mb-0">Add a Review</h3>
                         </div>
                         <div class="user-info bg-white mt-3 d-flex align-items-center justify-content-center">
-                            <img :src="profileImg" alt="Profile" class="avatar rounded-circle" />
-                            <h1 class="mb-2 text-dark">{{ nickName }}</h1>
+                            <img :src="review.profileImg" alt="Profile" class="avatar rounded-circle" />
+                            <h1 class="mb-2 text-dark">{{ review.nickName }}</h1>
                             <!-- 텍스트 크기 변경 -->
                         </div>
                     </div>
@@ -18,15 +18,15 @@
                             <div class="ratings mb-4">
                                 <div class="rating-item">
                                     <h4 class="text-dark mt-2">Recommendation Score</h4>
-                                    <vue3starRatings v-model="review.recommendation"></vue3starRatings>
+                                    <vue3starRatings v-model="review.total"></vue3starRatings>
                                 </div>
                                 <div class="rating-item">
                                     <h4 class="text-dark mt-2">Transportation</h4>
-                                    <vue3starRatings v-model="review.transportation"></vue3starRatings>
+                                    <vue3starRatings v-model="review.traffic"></vue3starRatings>
                                 </div>
                                 <div class="rating-item">
                                     <h4 class="text-dark mt-2">Environment</h4>
-                                    <vue3starRatings v-model="review.environment"></vue3starRatings>
+                                    <vue3starRatings v-model="review.travel"></vue3starRatings>
                                 </div>
                                 <div class="rating-item">
                                     <h4 class="text-dark mt-2">Total Quality</h4>
@@ -34,13 +34,10 @@
                                 </div>
                             </div>
                             <h4 class="text-dark mt-2">Food Quality</h4>
-                            <MaterialTextArea class="input-group-static" label="Comment" v-model="review.comment"
-                                placeholder="Write your review here..." />
+                            <MaterialTextArea class="input-group-static" label="Comment" v-model="review.comment" placeholder="Write your review here..." />
                             <div class="text-center mt-5">
-                                <MaterialButton variant="gradient" color="secondary" class="mx-2">Submit Review
-                                </MaterialButton>
-                                <MaterialButton variant="gradient" color="secondary" class="mx-2" @click="closeModal">
-                                    Close </MaterialButton>
+                                <MaterialButton variant="gradient" color="secondary" class="mx-2">Submit Review </MaterialButton>
+                                <MaterialButton variant="gradient" color="secondary" class="mx-2" @click="closeModal"> Close </MaterialButton>
                             </div>
                         </form>
                     </div>
@@ -62,27 +59,28 @@ import Swal from "sweetalert2";
 const userStore = useUserStore();
 const { userInfo } = storeToRefs(userStore);
 const userIdx = userInfo.value.userIdx;
-const nickName = userInfo.value.nickName;
-const profileImg = userInfo.value.profileImg;
 
 const review = ref({
-    date: "",
-    recommendation: 0,
-    transportation: 0,
-    environment: 0,
-    food: 0,
+    reviewIdx: "",
+    writerIdx: "",
+    place: "",
     comment: "",
+    total: 0,
+    traffic: 0,
+    travel: 0,
+    food: 0,
+    nickname: "",
+    profileImg: "",
 });
-const emit = defineEmits(["close"]);
 
 function submitReview() {
-    console.log('Review submitted:', review.value);
+    console.log("Review submitted:", review.value);
     Swal.fire({
         icon: "success",
         title: `리뷰 추가 성공`,
         text: `${userInfo.value.nickName}님 다른 사용자들을 위한 소중한 리뷰 감사합니다`,
     });
-    emit('close');
+    emit("close");
 }
 
 function closeModal() {

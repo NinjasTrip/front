@@ -9,7 +9,14 @@ async function postReview(param, success, fail) {
 
 async function getReview(placeName, success, fail) {
     local.defaults.headers["Authorization"] = sessionStorage.getItem("accessToken");
-    await local.get(`/review/${placeName}`).then(success).catch(fail);
+    local.defaults.headers["Authorization"] = sessionStorage.getItem("accessToken");
+    try {
+        const response = await local.get(`/review/${placeName}`);
+        return response;
+    } catch (error) {
+        console.error("Error fetching reviews:", error);
+        throw error; // 에러를 던져서 외부에서 캐치할 수 있도록 함
+    }
 }
 
 export { postReview, getReview };
