@@ -66,11 +66,12 @@ const nickName = userInfo.value.nickName;
 const profileImg = userInfo.value.profileImg;
 
 const review = ref({
-    recommendation: 0,  // 추천점수 
-    transportation: 0, //교통점수
-    environment: 0, // 환경점수
-    food: 0, // 음식점수
-    comment: "", // 종합코멘트
+    date: "",
+    recommendation: 0,
+    transportation: 0,
+    environment: 0,
+    food: 0,
+    comment: "",
 });
 const emit = defineEmits(["close"]);
 
