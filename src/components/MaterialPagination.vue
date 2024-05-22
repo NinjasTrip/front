@@ -1,25 +1,25 @@
 <script setup>
 defineProps({
-  color: {
-    type: String,
-    default: "success",
-  },
-  size: {
-    type: String,
-    default: "",
-  },
+    color: {
+        type: String,
+        default: "secondary",
+    },
+    size: {
+        type: String,
+        default: "",
+    },
 });
 function getClasses(color, size) {
-  let colorValue, sizeValue;
+    let colorValue, sizeValue;
 
-  colorValue = color && `pagination-${color}`;
-  sizeValue = size && `pagination-${size}`;
+    colorValue = color && `pagination-${color}`;
+    sizeValue = size && `pagination-${size}`;
 
-  return `${colorValue} ${sizeValue}`;
+    return `${colorValue} ${sizeValue}`;
 }
 </script>
 <template>
-  <ul class="pagination" :class="getClasses(color, size)">
-    <slot />
-  </ul>
+    <ul class="pagination" :class="getClasses(color, size)">
+        <slot />
+    </ul>
 </template>

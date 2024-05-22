@@ -11,7 +11,7 @@
             <div class="container">
                 <div class="row justify-content-center not-trans-section">
                     <div class="col-lg-10">
-                        <h2 class="my-3 py-3 shadow-sm text-center">
+                        <h2 class="title-square my-3 py-3 shadow-sm text-center">
                             <mark class="sky">글목록</mark>
                         </h2>
                     </div>
@@ -23,8 +23,8 @@
                             <div class="col-md-5 offset-md-5">
                                 <form class="d-flex">
                                     <VSelect :selectOption="selectOption" @onKeySelect="changeKey" />
-                                    <div class="input-group input-group-sm ms-1">
-                                        <input type="text" class="form-control" v-model="param.word" placeholder="검색어..." />
+                                    <div class="input-group input-group-sm ms-1 align-items-center">
+                                        <input type="text" class="form-control border me-1" v-model="param.word" placeholder="검색어..." />
                                         <button class="btn btn-dark" type="button" @click="getArticleList">검색</button>
                                     </div>
                                 </form>
@@ -118,5 +118,9 @@ const moveWrite = () => {
 .not-trans-section {
     background-color: rgba(255, 255, 255); /* Adjust the opacity as needed */
     border-radius: 10px; /* Optional: add rounded corners */
+}
+
+.title-square {
+    background-color: rgb(187, 187, 187);
 }
 </style>
