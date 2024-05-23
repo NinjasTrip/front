@@ -182,6 +182,25 @@ watch(
                                     <span>Search Destination</span>
                                 </RouterLink>
                             </div>
+                            <!--aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
+                            <div class="row d-none d-lg-block">
+                                <div class="col-12 px-4 py-2">
+                                    <div class="row">
+                                        <div class="position-relative">
+                                            <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">Move to Board</div>
+                                            <RouterLink :to="{ name: 'board' }" class="dropdown-item border-radius-md">
+                                                <span>Communicate with people and share your daily life.</span>
+                                            </RouterLink>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-lg-none">
+                                <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0">Move to Board</div>
+                                <RouterLink :to="{ name: 'board' }" class="dropdown-item border-radius-md">
+                                    <span>Communicate with people and share your daily life.</span>
+                                </RouterLink>
+                            </div>
                         </div>
                     </li>
                     <li class="nav-item dropdown dropdown-hover mx-2">
@@ -253,7 +272,7 @@ watch(
                     <li class="nav-item dropdown dropdown-hover mx-2">
                         <a role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center" :class="getTextColor()" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="material-icons opacity-6 me-2 text-md" :class="getTextColor()">article</i>
-                            Board
+                            Profile
                             <img :src="getArrowColor()" alt="down-arrow" class="arrow ms-2 d-lg-block d-none" />
                             <img :src="getArrowColor()" alt="down-arrow" class="arrow ms-1 d-lg-none d-block ms-auto" />
                         </a>
@@ -266,6 +285,24 @@ watch(
                                 <ul class="list-group">
                                     <li class="nav-item list-group-item border-0 p-0">
                                         <a class="dropdown-item py-2 ps-3 border-radius-md">
+                                            <RouterLink :to="{ name: 'user-info' }" class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
+                                                <span>Your Profile</span>
+                                            </RouterLink>
+                                            <span class="text-sm">Check your Account</span>
+                                        </a>
+                                        <a class="dropdown-item py-2 ps-3 border-radius-md">
+                                            <RouterLink :to="{ name: 'change-info' }" class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
+                                                <span>Change Profile</span>
+                                            </RouterLink>
+                                            <span class="text-sm">Change your Information</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="row d-lg-none">
+                                <ul class="list-group">
+                                    <li class="nav-item list-group-item border-0 p-0">
+                                        <a class="dropdown-item py-2 ps-3 border-radius-md">
                                             <RouterLink :to="{ name: 'board' }" class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
                                                 <span>Move to Board</span>
                                             </RouterLink>
@@ -273,14 +310,6 @@ watch(
                                         </a>
                                     </li>
                                 </ul>
-                            </div>
-                            <div class="row d-lg-none">
-                                <div class="col-md-12 g-0">
-                                    <a class="dropdown-item py-2 ps-3 border-radius-md" href="./pages/about-us.html">
-                                        <h6 class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">Getting Started</h6>
-                                        <span class="text-sm">All about overview, quick start, license and contents</span>
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </li>

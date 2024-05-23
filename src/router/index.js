@@ -10,6 +10,7 @@ import BoardDetail from "@/views/Board/BoardDetail.vue";
 import BoardModify from "@/views/Board/BoardModify.vue";
 import FindPassword from "@/views/LandingPages/User/FindPassword.vue";
 import ChangeUserInfo from "@/views/LandingPages/User/ChangeUserInfo.vue";
+import ChangedUserInfo from "@/views/LandingPages/User/ChangedUserInfo.vue";
 import UserInfo from "@/views/LandingPages/User/UserInfo.vue";
 
 const router = createRouter({
@@ -39,6 +40,11 @@ const router = createRouter({
             path: "/user/info",
             name: "user-info",
             component: UserInfo,
+        },
+        {
+            path: "/user/infoo",
+            name: "user-infoo",
+            component: ChangedUserInfo,
         },
         {
             path: "/user/change-info",

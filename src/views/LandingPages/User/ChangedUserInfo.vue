@@ -33,8 +33,8 @@ const moveSignUp = () => {
     console.log("Success Move sign-up");
 };
 
-const moveUserInfo = () => {
-    router.push({ name: "user-infoo" });
+const moveUserInfoChange = () => {
+    router.push({ name: "change-info" });
 };
 
 const moveFindPassword = () => {
@@ -85,32 +85,11 @@ onMounted(() => {
                                 <MaterialAvatar :image="proImg" alt="Image placeholder" size="xxl" />
                             </div>
                             <div class="card-body">
-                                <form role="form" class="text-start" @submit.prevent="moveUserInfo">
-                                    <MaterialInput class="mb-2 mt-3" type="text" placeholder="kodd1102@naver.com" isDisabled />
-                                    <LoginInput
-                                        v-model="loginUser.password"
-                                        id="password"
-                                        class="input-group-outline mb-3"
-                                        :label="{
-                                            text: 'Password',
-                                            class: 'form-label',
-                                        }"
-                                        type="password"
-                                    />
-                                    <!-- <MaterialSwitch class="d-flex align-items-center mb-3" id="rememberMe" labelClass="mb-0 ms-3" checked>ID 정보 저장</MaterialSwitch> -->
-                                    <LoginInput
-                                        id="nickname"
-                                        class="input-group-outline mb-3"
-                                        :label="{
-                                            text: '데옹',
-                                            class: 'form-label',
-                                        }"
-                                        type="text"
-                                    />
-                                    <div class="text-center">
-                                        <MaterialButton class="my-4 mb-2" variant="gradient" color="success" fullWidth>Change</MaterialButton>
-                                    </div>
-                                </form>
+                                <MaterialInput class="mb-2 mt-3" type="text" placeholder="kodd1102@naver.com" isDisabled />
+                                <MaterialInput class="mb-2 mt-3" type="text" placeholder="세미콜론닌자" isDisabled />
+                                <div class="text-center">
+                                    <MaterialButton class="my-4 mb-2" variant="gradient" color="success" fullWidth @click="moveUserInfoChange">Change</MaterialButton>
+                                </div>
                             </div>
                         </div>
                     </div>
