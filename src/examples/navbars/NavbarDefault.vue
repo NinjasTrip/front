@@ -245,84 +245,15 @@ watch(
                                                 </div>
                                             </div>
                                         </a>
-                                        <div class="dropdown-menu mt-0 py-3 px-2 mt-3">
-                                            <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Avatars </RouterLink>
-                                            <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Badges </RouterLink>
-                                            <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Breadcrumbs </RouterLink>
-                                            <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Buttons </RouterLink>
-                                            <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Button Groups </RouterLink>
-                                            <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Dropdowns </RouterLink>
-                                            <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Progress Bars </RouterLink>
-                                            <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Toggles </RouterLink>
-                                            <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Typography </RouterLink>
-                                        </div>
                                     </li>
                                 </ul>
-                            </div>
-                            <div class="row d-lg-none">
-                                <div class="col-md-12">
-                                    <div class="d-flex mb-2">
-                                        <div class="w-100 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <h6 class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">Page Sections</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Page Headers </RouterLink>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Features </RouterLink>
-                                    <div class="d-flex mb-2 mt-3">
-                                        <div class="w-100 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <h6 class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">Navigation</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Navbars </RouterLink>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Nav Tabs </RouterLink>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Pagination </RouterLink>
-                                    <div class="d-flex mb-2 mt-3">
-                                        <div class="w-100 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <h6 class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">Input Areas</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Inputs </RouterLink>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Forms </RouterLink>
-                                    <div class="d-flex mb-2 mt-3">
-                                        <div class="w-100 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <h6 class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">Attention Catchers</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Alerts </RouterLink>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Modals </RouterLink>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Tooltips & Popovers </RouterLink>
-                                    <div class="d-flex mb-2 mt-3">
-                                        <div class="w-100 d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <h6 class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">Elements</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Avatars </RouterLink>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Badges </RouterLink>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Breadcrumbs </RouterLink>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Buttons </RouterLink>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Button Groups </RouterLink>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Dropdowns </RouterLink>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Progress Bars </RouterLink>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Toggles </RouterLink>
-                                    <RouterLink class="dropdown-item ps-3 border-radius-md mb-1" :to="{ name: 'presentation' }"> Typography </RouterLink>
-                                </div>
                             </div>
                         </div>
                     </li>
                     <li class="nav-item dropdown dropdown-hover mx-2">
                         <a role="button" class="nav-link ps-2 d-flex cursor-pointer align-items-center" :class="getTextColor()" id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="material-icons opacity-6 me-2 text-md" :class="getTextColor()">article</i>
-                            About Us
+                            Board
                             <img :src="getArrowColor()" alt="down-arrow" class="arrow ms-2 d-lg-block d-none" />
                             <img :src="getArrowColor()" alt="down-arrow" class="arrow ms-1 d-lg-none d-block ms-auto" />
                         </a>
@@ -334,11 +265,11 @@ watch(
                             <div class="d-none d-lg-block">
                                 <ul class="list-group">
                                     <li class="nav-item list-group-item border-0 p-0">
-                                        <a class="dropdown-item py-2 ps-3 border-radius-md" href=" https://www.creative-tim.com/learning-lab/vue/overview/material-kit/">
-                                            <RouterLink :to="{ name: 'presentation' }" class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
-                                                <span>Sign In</span>
+                                        <a class="dropdown-item py-2 ps-3 border-radius-md">
+                                            <RouterLink :to="{ name: 'board' }" class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center p-0">
+                                                <span>Move to Board</span>
                                             </RouterLink>
-                                            <span class="text-sm">All about overview, quick start, license and contents</span>
+                                            <span class="text-sm">Communicate with people and share your daily life.</span>
                                         </a>
                                     </li>
                                 </ul>

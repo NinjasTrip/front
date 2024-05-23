@@ -7,6 +7,10 @@ import PlanView from "@/views/Plan/PlanView.vue";
 import BoardList from "@/views/Board/BoardList.vue";
 import BoardWrite from "@/views/Board/BoardWrite.vue";
 import BoardDetail from "@/views/Board/BoardDetail.vue";
+import BoardModify from "@/views/Board/BoardModify.vue";
+import FindPassword from "@/views/LandingPages/User/FindPassword.vue";
+import ChangeUserInfo from "@/views/LandingPages/User/ChangeUserInfo.vue";
+import UserInfo from "@/views/LandingPages/User/UserInfo.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,6 +29,21 @@ const router = createRouter({
             path: "/sign-up",
             name: "signup",
             component: SignUpView,
+        },
+        {
+            path: "/find-pw",
+            name: "find-password",
+            component: FindPassword,
+        },
+        {
+            path: "/user/info",
+            name: "user-info",
+            component: UserInfo,
+        },
+        {
+            path: "/user/change-info",
+            name: "change-info",
+            component: ChangeUserInfo,
         },
         {
             path: "/pages/landing-pages/contact-us",
@@ -47,9 +66,14 @@ const router = createRouter({
             component: BoardWrite,
         },
         {
-            path: "/board/${boardIdx}",
+            path: "/board/:boardIdx",
             name: "article-view",
             component: BoardDetail,
+        },
+        {
+            path: "/board/modify/:boardIdx",
+            name: "article-modfify",
+            component: BoardModify,
         },
     ],
 });

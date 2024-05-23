@@ -10,7 +10,7 @@ import DefaultNavbar from "@/examples/navbars/NavbarBeforeLogin.vue";
 import Header from "@/examples/Header.vue";
 
 //Vue Material Kit 2 components
-import MaterialInput from "@/components/MaterialInput.vue";
+import MaterialInput from "@/components/LoginInput.vue";
 import MaterialSwitch from "@/components/MaterialSwitch.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 

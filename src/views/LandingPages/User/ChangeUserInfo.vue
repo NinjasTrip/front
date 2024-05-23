@@ -33,20 +33,27 @@ const moveSignUp = () => {
     console.log("Success Move sign-up");
 };
 
+const moveUserInfo = () => {
+    router.push({ name: "user-info" });
+};
+
 const moveFindPassword = () => {
     router.push({ name: "find-password" });
 };
 
 // example components
-import DefaultNavbar from "@/examples/navbars/NavbarBeforeLogin.vue";
+import DefaultNavbar from "@/examples/navbars/NavbarDefault.vue";
 import Header from "@/examples/Header.vue";
 
 //Vue Material Kit 2 components
 import LoginInput from "@/components/LoginInput.vue";
+import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialSwitch from "@/components/MaterialSwitch.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
+import MaterialAvatar from "@/components/MaterialAvatar.vue";
 
 import bgImage from "@/assets/img/bgg6.jpg";
+import proImg from "@/assets/img/favicon.png";
 
 const backgroundStyle = {
     backgroundImage: `url(${bgImage})`,
@@ -71,21 +78,15 @@ onMounted(() => {
                         <div class="card z-index-0 fadeIn3 fadeInBottom">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
-                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign in</h4>
+                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Change User Info</h4>
                                 </div>
                             </div>
+                            <div class="d-flex justify-content-center align-items-center mt-3">
+                                <MaterialAvatar :image="proImg" alt="Image placeholder" size="xxl" />
+                            </div>
                             <div class="card-body">
-                                <form role="form" class="text-start" @submit.prevent="login">
-                                    <LoginInput
-                                        v-model="loginUser.email"
-                                        id="email"
-                                        class="input-group-outline my-3"
-                                        :label="{
-                                            text: 'Email',
-                                            class: 'form-label',
-                                        }"
-                                        type="email"
-                                    />
+                                <form role="form" class="text-start" @submit.prevent="moveUserInfo">
+                                    <MaterialInput class="mb-2 mt-3" type="text" placeholder="kodd1102@naver.com" isDisabled />
                                     <LoginInput
                                         v-model="loginUser.password"
                                         id="password"
@@ -97,16 +98,18 @@ onMounted(() => {
                                         type="password"
                                     />
                                     <!-- <MaterialSwitch class="d-flex align-items-center mb-3" id="rememberMe" labelClass="mb-0 ms-3" checked>ID 정보 저장</MaterialSwitch> -->
-
+                                    <LoginInput
+                                        id="nickname"
+                                        class="input-group-outline mb-3"
+                                        :label="{
+                                            text: '데옹',
+                                            class: 'form-label',
+                                        }"
+                                        type="text"
+                                    />
                                     <div class="text-center">
-                                        <MaterialButton class="my-4 mb-2" variant="gradient" color="success" fullWidth>Sign in</MaterialButton>
+                                        <MaterialButton class="my-4 mb-2" variant="gradient" color="success" fullWidth>Change</MaterialButton>
                                     </div>
-                                    <p class="mt-4 text-sm text-center">
-                                        Don't have an account?
-                                        <button class="text-success text-gradient font-weight-bold" @click="moveSignUp">Sign up</button><br />
-                                        Forgot your password?
-                                        <button class="text-success text-gradient font-weight-bold" @click="moveFindPassword">Find password</button>
-                                    </p>
                                 </form>
                             </div>
                         </div>

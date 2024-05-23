@@ -62,6 +62,10 @@ const onPageChange = (val) => {
 const moveWrite = () => {
     router.push({ name: "board-write" });
 };
+
+const moveDetail = (boardIdx) => {
+    router.push({ name: "article-view", params: { boardIdx } });
+};
 </script>
 
 <template>
@@ -97,7 +101,7 @@ const moveWrite = () => {
                             </div>
                         </div>
                         <div class="row">
-                            <BoardListItem v-for="article in articles" :key="article.boardIdx" :article="article" />
+                            <BoardListItem v-for="article in articles" :key="article.boardIdx" :article="article" @click="moveDetail(article.boardIdx)" />
                         </div>
                     </div>
                     <BoardPagination />

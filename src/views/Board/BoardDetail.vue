@@ -2,100 +2,95 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { detailArticle, deleteArticle } from "@/api/board";
+import { format } from "date-fns";
+
+import NavbarDefault from "@/examples/navbars/NavbarDefault.vue";
+import FooterDefault from "@/examples/footers/FooterDefault.vue";
+import bg0 from "@/assets/img/bgg6.jpg";
 
 const route = useRoute();
 const router = useRouter();
 
-// const articleno = ref(route.params.articleno);
-const { articleno } = route.params;
-
-const article = ref({});
+const { boardIdx } = route.params;
+const article = ref(null);
 
 onMounted(() => {
-  getArticle();
+    getArticle();
 });
 
-const getArticle = () => {
-  detailArticle(
-    articleno,
-    ({ data }) => {
-      article.value = data;
-    },
-    (error) => {
-      console.error(error);
-    }
-  );
+const getArticle = async () => {
+    detailArticle(
+        boardIdx,
+        ({ data }) => {
+            article.value = data;
+            if (article.value.createdAt) {
+                article.value.formattedDate = format(new Date(...article.value.createdAt), "PPPppp");
+            }
+        },
+        (error) => {
+            console.error(error);
+        }
+    );
 };
 
 function moveList() {
-  router.push({ name: "article-list" });
+    router.push({ name: "board" });
 }
 
 function moveModify() {
-  router.push({ name: "article-modify", params: { articleno } });
+    router.push({ name: "article-modify", params: { boardIdx } });
 }
 
 function onDeleteArticle() {
-  deleteArticle(
-    articleno,
-    (response) => {
-      if (response.status == 200) moveList();
-    },
-    (error) => {
-      console.error(error);
-    }
-  );
+    deleteArticle(
+        boardIdx,
+        (response) => {
+            if (response.status == 200) moveList();
+        },
+        (error) => {
+            console.error(error);
+        }
+    );
 }
 </script>
 
 <template>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-10">
-        <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-          <mark class="sky">글보기</mark>
-        </h2>
-      </div>
-      <div class="col-lg-10 text-start">
-        <div class="row my-2">
-          <h2 class="text-secondary px-5">{{ article.articleNo }}. {{ article.subject }}</h2>
-        </div>
-        <div class="row">
-          <div class="col-md-8">
-            <div class="clearfix align-content-center">
-              <img
-                class="avatar me-2 float-md-start bg-light p-2"
-                src="https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg"
-              />
-              <p>
-                <span class="fw-bold">안효인</span> <br />
-                <span class="text-secondary fw-light">
-                  {{ article.registerTime }}1 조회 : {{ article.hit }}
-                </span>
-              </p>
+    <div>
+        <NavbarDefault :sticky="true" />
+        <div class="page-header min-vh-75" :style="{ backgroundImage: `url(${bg0})` }">
+            <div class="container mt-8">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="content-wrapper p-4 shadow-sm">
+                            <h2 class="title-square my-3 py-3 text-center">{{ article.article.title }}</h2>
+                            <div class="article-details">
+                                <p>작성자: {{ article.article.nickname }}</p>
+                                <p>내용: {{ article.article.content }}</p>
+                                <p>작성일: {{ article.article.formattedDate || "" }}</p>
+                                <p>조회수: {{ article.article.hit }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-4 align-self-center text-end">댓글 : 17</div>
-          <div class="divider mb-3"></div>
-          <div class="text-secondary">
-            {{ article.content }}
-          </div>
-          <div class="divider mt-3 mb-3"></div>
-          <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-outline-primary mb-3" @click="moveList">
-              글목록
-            </button>
-            <button type="button" class="btn btn-outline-success mb-3 ms-1" @click="moveModify">
-              글수정
-            </button>
-            <button type="button" class="btn btn-outline-danger mb-3 ms-1" @click="onDeleteArticle">
-              글삭제
-            </button>
-          </div>
         </div>
-      </div>
+        <FooterDefault />
     </div>
-  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.title-square {
+    background-color: rgb(187, 187, 187);
+    border-radius: 30px;
+}
+
+.content-wrapper {
+    background-color: white;
+    border-radius: 30px;
+    padding: 20px;
+}
+
+.article-details p {
+    margin-bottom: 0.5rem;
+}
+</style>
