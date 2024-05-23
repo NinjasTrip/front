@@ -90,19 +90,19 @@
             <div class="px-3">
                 <div class="border-bottom d-flex py-2 text-danger">
                     <div class="w-25">추천점수</div>
-                    <div>⭐⭐⭐⭐</div>
+                    <div></div>
                 </div>
                 <div class="border-bottom d-flex py-2">
                     <div class="text-secondary w-25">교통요건</div>
-                    <div>⭐⭐⭐</div>
+                    <div></div>
                 </div>
                 <div class="border-bottom d-flex py-2">
                     <div class="text-secondary w-25">관광환경</div>
-                    <div>⭐⭐⭐⭐⭐</div>
+                    <div></div>
                 </div>
                 <div class="border-bottom d-flex py-2">
                     <div class="text-secondary w-25">음식환경</div>
-                    <div>⭐⭐⭐⭐</div>
+                    <div></div>
                 </div>
                 <div class="pt-2 text-secondary">종합의견</div>
                 <div class="py-2">
