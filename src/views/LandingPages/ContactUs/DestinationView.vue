@@ -112,34 +112,6 @@
         </div>
         <div class="py-1 bg-secondary"></div>
         <!-- 매물정보 -->
-        <div class="bg-white mb-2">
-            <div class="border-bottom">
-                <h5 class="p-3 m-0">DiaryList</h5>
-            </div>
-            <div>
-                <table class="w-100">
-                    <thead class="bg-secondary text-white">
-                        <tr>
-                            <td class="ps-3 py-1">타입</td>
-                            <td class="w-50">제목</td>
-                            <td>거래가격</td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody class="px-2">
-                        <tr class="border-bottom">
-                            <td colspan="3" class="ps-3 py-2">등록된 매물이 없습니다.</td>
-                        </tr>
-                        <tr class="border-bottom">
-                            <td class="ps-3 py-2">Sale</td>
-                            <td>Nice apartment</td>
-                            <td>600M</td>
-                            <td><button>❤️</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
 </template>
 
